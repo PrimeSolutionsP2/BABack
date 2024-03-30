@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'BaBack'
+rootProject.name = 'Collections'
 
 include ':app-service'
 include ':model'
@@ -16,3 +16,7 @@ project(':model').projectDir = file('./domain/model')
 project(':usecase').projectDir = file('./domain/usecase')
 include ':api-rest'
 project(':api-rest').projectDir = file('./infrastructure/entry-points/api-rest')
+include ':jpa-repository'
+project(':jpa-repository').projectDir = file('./infrastructure/driven-adapters/jpa-repository')
+include ':util'
+project(':util').projectDir = file('./domain/util')

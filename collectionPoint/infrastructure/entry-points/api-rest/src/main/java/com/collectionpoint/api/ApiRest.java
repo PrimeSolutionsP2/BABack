@@ -1,5 +1,6 @@
 package com.collectionpoint.api;
 import com.collectionpoint.model.CollectionPoint;
+import com.collectionpoint.model.CollectionPointFilter;
 import com.collectionpoint.usecase.CollectionPointUseCase;
 import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
@@ -25,21 +26,17 @@ public class ApiRest {
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "email", required = false) String email,
             @RequestParam(name = "address", required = false) String address,
+            @RequestParam(name = "city", required = false) String city,
             @RequestParam(name = "state", required = false) String state,
             @RequestParam(name = "country", required = false) String country,
-            @RequestParam(name = "active",required = false, defaultValue = "true") Boolean active
+            @RequestParam(name = "status",required = false) String status
     ) {
-        return new ResponseEntity<>(useCase.getAll(id_card, name, email, address, state, country, active), HttpStatus.OK);
+        CollectionPointFilter cpf = new CollectionPointFilter(id_card, name, email, address, city, state, country, status);
+        return new ResponseEntity<>(useCase.getAll(cpf), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CollectionPoint> getById(@PathParam("id") int id) {
         return new ResponseEntity<>(useCase.getById(id), HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/path")
-    public String commandName() {
-//      return useCase.doAction();
-        return "Hello World";
     }
 }

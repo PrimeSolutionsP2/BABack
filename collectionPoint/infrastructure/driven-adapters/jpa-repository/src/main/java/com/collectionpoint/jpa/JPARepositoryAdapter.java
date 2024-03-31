@@ -3,6 +3,7 @@ package com.collectionpoint.jpa;
 import com.collectionpoint.jpa.entity.CollectionPointEntity;
 import com.collectionpoint.jpa.helper.AdapterOperations;
 import com.collectionpoint.model.CollectionPoint;
+import com.collectionpoint.model.CollectionPointFilter;
 import com.collectionpoint.model.gateways.CollectionPointRepository;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -25,10 +26,19 @@ implements CollectionPointRepository
     }
 
     @Override
-    public List<CollectionPoint> getAll(String id_card, String name, String email, String address, String state, String country, boolean active) {
+    public List<CollectionPoint> getAll(CollectionPointFilter cpf) {
         List<CollectionPoint> result = new ArrayList<>();
-        this.repository.findByAddressStateCountryActive(id_card, name, email, address, state, country, active)
-                .forEach(collectionPointEntity -> result.add(toEntity(collectionPointEntity)));
+        this.repository.findByFilters(
+                cpf.getIdCard(),
+                cpf.getName(),
+                cpf.getEmail(),
+                cpf.getAddress(),
+                cpf.getCity(),
+                cpf.getState(),
+                cpf.getCountry(),
+                cpf.getStatus()
+            )
+            .forEach(collectionPointEntity -> result.add(toEntity(collectionPointEntity)));
         return result;
     }
 

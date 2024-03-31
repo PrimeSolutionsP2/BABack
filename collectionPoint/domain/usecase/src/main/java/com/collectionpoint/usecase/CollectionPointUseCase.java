@@ -1,19 +1,18 @@
 package com.collectionpoint.usecase;
 
 import com.collectionpoint.model.CollectionPoint;
+import com.collectionpoint.model.CollectionPointFilter;
 import com.collectionpoint.model.gateways.CollectionPointRepository;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class CollectionPointUseCase {
-    private final CollectionPointRepository collectionPointRepository;
+    private CollectionPointRepository collectionPointRepository;
 
-    public CollectionPointUseCase(CollectionPointRepository collectionPointRepository) {
-        this.collectionPointRepository = collectionPointRepository;
-    }
-
-    public List<CollectionPoint> getAll(String id_card, String name, String email, String address, String state, String country, boolean active) {
-        return collectionPointRepository.getAll(id_card, name, email, address, state, country, active);
+    public List<CollectionPoint> getAll(CollectionPointFilter cpf) {
+        return collectionPointRepository.getAll(cpf);
     }
 
     public CollectionPoint getById(int id) {

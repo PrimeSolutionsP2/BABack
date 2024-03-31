@@ -22,17 +22,19 @@ public interface JPARepository extends CrudRepository<CollectionPointEntity, Int
             "(:name IS NULL OR user.name=:name) AND " +
             "(:email IS NULL OR user.email = :email) AND " +
             "(:address IS NULL OR storage_point.address LIKE %:address%) AND " +
+            "(:city IS NULL OR storage_point.city LIKE %:city%) AND " +
             "(:state IS NULL OR storage_point.state LIKE %:state%) AND " +
             "(:country IS NULL OR storage_point.country LIKE %:country%) AND " +
-            "(:active IS NULL OR storage_point.storage_point_state = :active)",
+            "(:status IS NULL OR status = :status)",
         nativeQuery = true)
-    List<CollectionPointEntity> findByAddressStateCountryActive(
+    List<CollectionPointEntity> findByFilters(
             @Param("id_card") String id_card,
             @Param("name") String name,
             @Param("email") String email,
             @Param("address") String address,
+            @Param("city") String city,
             @Param("state") String state,
             @Param("country") String country,
-            @Param("active") boolean active
+            @Param("status") String status
     );
 }

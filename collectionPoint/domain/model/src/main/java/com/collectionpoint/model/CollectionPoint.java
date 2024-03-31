@@ -1,15 +1,16 @@
 package com.collectionpoint.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class CollectionPoint {
     private int id;
     private String address;
     private String agreement;
+    private String city;
     private String country;
-    private boolean active;
+    private String status;
     private int userId;
+
+    // TODO
+    // Implement document system
     //private int idDocument;
 
     public int getId() {
@@ -36,6 +37,14 @@ public class CollectionPoint {
         this.agreement = agreement;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -44,12 +53,12 @@ public class CollectionPoint {
         this.country = country;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getUserId() {

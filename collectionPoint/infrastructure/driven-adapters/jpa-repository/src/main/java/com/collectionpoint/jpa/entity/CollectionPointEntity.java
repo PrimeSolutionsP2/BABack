@@ -13,10 +13,10 @@ public class CollectionPointEntity {
     private String address;
     @Column(name = "agreement_code")
     private String agreementCode;
+    private String city;
     private String state;
     private String country;
-    @Column(name = "storage_point_state")
-    private Boolean active;
+    private String status;
 
     public Integer getId() {
         return id;
@@ -50,6 +50,14 @@ public class CollectionPointEntity {
         this.agreementCode = agreementCode;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getState() {
         return state;
     }
@@ -66,11 +74,11 @@ public class CollectionPointEntity {
         this.country = country;
     }
 
-    public Boolean getActive() {
-        return active;
+    public String getStatus() {
+        return status;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

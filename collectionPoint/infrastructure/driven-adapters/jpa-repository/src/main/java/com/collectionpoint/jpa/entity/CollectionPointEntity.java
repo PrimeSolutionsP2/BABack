@@ -3,20 +3,24 @@ package com.collectionpoint.jpa.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "storage_point")
+@Table(name = "collection_point")
 public class CollectionPointEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "user_id")
-    private Integer userId;
+    private String userId;
     private String address;
     @Column(name = "agreement_code")
     private String agreementCode;
     private String city;
     private String state;
     private String country;
-    private String status;
+    @Column(name = "status_id")
+    private Integer statusId;
+    @ManyToOne
+    @JoinColumn(name = "status_id", insertable = false, updatable = false)
+    private StatusEntity status;
 
     public Integer getId() {
         return id;
@@ -26,11 +30,11 @@ public class CollectionPointEntity {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -74,11 +78,19 @@ public class CollectionPointEntity {
         this.country = country;
     }
 
-    public String getStatus() {
+    public Integer getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Integer statusId) {
+        this.statusId = statusId;
+    }
+
+    public StatusEntity getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusEntity status) {
         this.status = status;
     }
 }

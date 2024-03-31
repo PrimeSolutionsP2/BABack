@@ -6,8 +6,8 @@ import lombok.Setter;
 
 public class CollectionPointFilter {
 
-    public CollectionPointFilter(String idCard, String name, String email, String address, String city, String state, String country, String status) {
-        this.idCard = idCard;
+    public CollectionPointFilter(String userId, String name, String email, String address, String city, String state, String country, String status) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -17,7 +17,7 @@ public class CollectionPointFilter {
         this.status = status;
     }
 
-    public String idCard;
+    public String userId;
     public String name;
     public String email;
     public String address;
@@ -26,12 +26,12 @@ public class CollectionPointFilter {
     public String country;
     public String status;
 
-    public String getIdCard() {
-        return idCard;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {

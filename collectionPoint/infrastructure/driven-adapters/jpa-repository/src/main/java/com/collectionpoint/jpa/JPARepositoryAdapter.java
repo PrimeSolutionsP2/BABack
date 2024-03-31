@@ -29,7 +29,7 @@ implements CollectionPointRepository
     public List<CollectionPoint> getAll(CollectionPointFilter cpf) {
         List<CollectionPoint> result = new ArrayList<>();
         this.repository.findByFilters(
-                cpf.getIdCard(),
+                cpf.getUserId(),
                 cpf.getName(),
                 cpf.getEmail(),
                 cpf.getAddress(),

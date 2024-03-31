@@ -2,12 +2,13 @@ package com.collectionpoint.model;
 
 public class CollectionPoint {
     private int id;
-    private String address;
+    private String userId;
     private String agreement;
+    private String address;
     private String city;
+    private String state;
     private String country;
-    private String status;
-    private int userId;
+    private Status status;
 
     // TODO
     // Implement document system
@@ -21,12 +22,12 @@ public class CollectionPoint {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAgreement() {
@@ -37,12 +38,28 @@ public class CollectionPoint {
         this.agreement = agreement;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getCountry() {
@@ -53,19 +70,11 @@ public class CollectionPoint {
         this.country = country;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 }

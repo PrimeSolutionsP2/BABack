@@ -22,7 +22,7 @@ public class ApiRest {
 
     @GetMapping("/")
     public ResponseEntity<List<CollectionPoint>> getAll(
-            @RequestParam(name = "id_card", required = false) String id_card,
+            @RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "email", required = false) String email,
             @RequestParam(name = "address", required = false) String address,
@@ -31,7 +31,7 @@ public class ApiRest {
             @RequestParam(name = "country", required = false) String country,
             @RequestParam(name = "status",required = false) String status
     ) {
-        CollectionPointFilter cpf = new CollectionPointFilter(id_card, name, email, address, city, state, country, status);
+        CollectionPointFilter cpf = new CollectionPointFilter(userId, name, email, address, city, state, country, status);
         return new ResponseEntity<>(useCase.getAll(cpf), HttpStatus.OK);
     }
 

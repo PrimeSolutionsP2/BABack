@@ -13,28 +13,28 @@ import java.util.List;
 public interface JPARepository extends CrudRepository<CollectionPointEntity, Integer>, QueryByExampleExecutor<CollectionPointEntity> {
     @Modifying
     @Query(value =
-            "SELECT storage_point.* " +
-            "FROM storage_point " +
-            "JOIN user " +
-            "ON storage_point.user_id = user.id " +
+            "SELECT cp.* " +
+            "FROM collection_point AS cp " +
+            "JOIN user AS us " +
+            "ON cp.user_id = us.id " +
             "WHERE " +
-            "(:id_card IS NULL OR user.id_card=:id_card) AND " +
-            "(:name IS NULL OR user.name=:name) AND " +
-            "(:email IS NULL OR user.email = :email) AND " +
-            "(:address IS NULL OR storage_point.address LIKE %:address%) AND " +
-            "(:city IS NULL OR storage_point.city LIKE %:city%) AND " +
-            "(:state IS NULL OR storage_point.state LIKE %:state%) AND " +
-            "(:country IS NULL OR storage_point.country LIKE %:country%) AND " +
-            "(:status IS NULL OR status = :status)",
+            "(:userId IS NULL OR us.id LIKE %:userId%) AND " +
+            "(:name IS NULL OR us.name LIKE %:name%) AND " +
+            "(:email IS NULL OR us.email LIKE %:email%) AND " +
+            "(:address IS NULL OR cp.address LIKE %:address%) AND " +
+            "(:city IS NULL OR cp.city LIKE %:city%) AND " +
+            "(:state IS NULL OR cp.state LIKE %:state%) AND " +
+            "(:country IS NULL OR cp.country LIKE %:country%) AND " +
+            "(:stat IS NULL OR cp.status_id = :stat)",
         nativeQuery = true)
     List<CollectionPointEntity> findByFilters(
-            @Param("id_card") String id_card,
+            @Param("userId") String userId,
             @Param("name") String name,
             @Param("email") String email,
             @Param("address") String address,
             @Param("city") String city,
             @Param("state") String state,
             @Param("country") String country,
-            @Param("status") String status
+            @Param("stat") String status
     );
 }

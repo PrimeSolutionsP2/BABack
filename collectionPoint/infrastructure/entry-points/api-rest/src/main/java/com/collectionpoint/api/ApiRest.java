@@ -2,7 +2,6 @@ package com.collectionpoint.api;
 import com.collectionpoint.model.CollectionPoint;
 import com.collectionpoint.model.CollectionPointFilter;
 import com.collectionpoint.usecase.CollectionPointUseCase;
-import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +27,16 @@ public class ApiRest {
             @RequestParam(name = "country", required = false) String country,
             @RequestParam(name = "status",required = false) String status
     ) {
-        CollectionPointFilter cpf = new CollectionPointFilter(userId, name, email, address, city, state, country, status);
+        CollectionPointFilter cpf = CollectionPointFilter.builder()
+                .userId(userId)
+                .name(name)
+                .email(email)
+                .address(address)
+                .city(city)
+                .state(state)
+                .country(country)
+                .status(status)
+                .build();
         return new ResponseEntity<>(useCase.getAll(cpf), HttpStatus.OK);
     }
 

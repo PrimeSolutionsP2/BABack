@@ -1,7 +1,6 @@
 package com.collectionpoint.jpa;
 
 import com.collectionpoint.jpa.entity.CollectionPointEntity;
-import com.collectionpoint.model.CollectionPoint;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

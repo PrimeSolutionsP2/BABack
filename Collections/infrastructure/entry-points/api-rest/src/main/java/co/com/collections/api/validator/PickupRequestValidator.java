@@ -18,8 +18,8 @@ public class PickupRequestValidator implements Validator<PickupRequest> {
 
     @Override
     public void validate(PickupRequest request) throws ValidationException {
-        if (Objects.isNull(request.getStorageId()) || request.getStorageId() <= 0) {
-            throw new ValidationException("Storage ID is required and must be a positive value");
+        if (Objects.isNull(request.getCollectionPointId()) || request.getCollectionPointId() <= 0) {
+            throw new ValidationException("Collection Point ID is required and must be a positive value");
         }
 
         if (Objects.isNull(request.getPickupDate()) ) {

@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 public class PickupRequest {
     private String id;
-    private Long userId;
-    private Long storageId;
+    private String userId;
+    private Long collectionPointId;
     private Integer kilograms;
     LocalDateTime pickupDate;
 }

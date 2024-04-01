@@ -20,7 +20,7 @@ public class PickupRequestUseCase {
 
     public PickupRequest createPickupRequest(PickupRequest data) {
         PickupRequest pickupRequest = PickupRequest.builder()
-                .storageId(data.getStorageId())
+                .collectionPointId(data.getCollectionPointId())
                 .pickupDate(data.getPickupDate())
                 .build();
         return pickupRequestRepository.createPickupRequest(pickupRequest);

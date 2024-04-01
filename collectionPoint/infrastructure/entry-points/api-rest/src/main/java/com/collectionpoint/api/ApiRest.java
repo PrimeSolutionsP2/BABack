@@ -1,6 +1,7 @@
 package com.collectionpoint.api;
 import com.collectionpoint.model.CollectionPoint;
-import com.collectionpoint.model.CollectionPointFilter;
+import com.collectionpoint.model.dto.CollectionPointFilter;
+import com.collectionpoint.model.dto.CollectionPointRequest;
 import com.collectionpoint.usecase.CollectionPointUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,10 @@ public class ApiRest {
     @GetMapping("/{id}")
     public ResponseEntity<CollectionPoint> getById(@PathVariable(name = "id") Integer id) {
         return new ResponseEntity<>(useCase.getById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/request")
+    public ResponseEntity<CollectionPoint> request(@RequestBody CollectionPointRequest collectionPointRequest) {
+        return new ResponseEntity<>(useCase.requestCollectionPoint(collectionPointRequest), HttpStatus.CREATED);
     }
 }

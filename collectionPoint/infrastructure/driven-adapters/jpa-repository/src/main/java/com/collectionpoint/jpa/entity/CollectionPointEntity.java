@@ -14,7 +14,7 @@ public class CollectionPointEntity {
     private String userId;
     private String address;
     @Column(name = "agreement_code")
-    private String agreementCode;
+    private String agreement;
     private String city;
     private String state;
     private String country;

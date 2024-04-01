@@ -11,6 +11,7 @@ public class CollectionPoint {
     private String city;
     private String state;
     private String country;
+    private int statusId;
     private Status status;
 
     // TODO

@@ -1,4 +1,4 @@
-package com.collectionpoint.model;
+package com.collectionpoint.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

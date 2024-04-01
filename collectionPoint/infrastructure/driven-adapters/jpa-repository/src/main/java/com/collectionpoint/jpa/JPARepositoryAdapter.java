@@ -3,7 +3,8 @@ package com.collectionpoint.jpa;
 import com.collectionpoint.jpa.entity.CollectionPointEntity;
 import com.collectionpoint.jpa.helper.AdapterOperations;
 import com.collectionpoint.model.CollectionPoint;
-import com.collectionpoint.model.CollectionPointFilter;
+import com.collectionpoint.model.dto.CollectionPointFilter;
+import com.collectionpoint.model.dto.CollectionPointRequest;
 import com.collectionpoint.model.gateways.CollectionPointRepository;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -21,17 +22,17 @@ implements CollectionPointRepository
     }
 
     @Override
-    public List<CollectionPoint> getAll(CollectionPointFilter cpf) {
+    public List<CollectionPoint> getAll(CollectionPointFilter collectionPointFilter) {
         List<CollectionPoint> result = new ArrayList<>();
         this.repository.findByFilters(
-                cpf.getUserId(),
-                cpf.getName(),
-                cpf.getEmail(),
-                cpf.getAddress(),
-                cpf.getCity(),
-                cpf.getState(),
-                cpf.getCountry(),
-                cpf.getStatus()
+                collectionPointFilter.getUserId(),
+                collectionPointFilter.getName(),
+                collectionPointFilter.getEmail(),
+                collectionPointFilter.getAddress(),
+                collectionPointFilter.getCity(),
+                collectionPointFilter.getState(),
+                collectionPointFilter.getCountry(),
+                collectionPointFilter.getStatus()
             )
             .forEach(collectionPointEntity -> result.add(toEntity(collectionPointEntity)));
         return result;
@@ -42,4 +43,8 @@ implements CollectionPointRepository
         return this.findById(id);
     }
 
+    @Override
+    public CollectionPoint create(CollectionPointRequest collectionPointRequest) {
+        return this.save(this.mapper.map(collectionPointRequest, CollectionPoint.class));
+    }
 }

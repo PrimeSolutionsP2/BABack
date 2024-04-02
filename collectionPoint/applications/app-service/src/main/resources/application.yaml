@@ -12,9 +12,6 @@ spring:
   profiles:
     include: null
   datasource:
-    url: "jdbc:mysql://localhost:3306/botellas_amor"
-    username: "sanchez"
-    password: "39278761Gian."
     driverClassName: "com.mysql.cj.jdbc.Driver"
   jpa:
     databasePlatform: "org.hibernate.dialect.MySQL8Dialect"
@@ -27,5 +24,8 @@ management:
     health:
       probes:
         enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
 cors:
   allowed-origins: "http://localhost:4200,http://localhost:8080"

@@ -27,9 +27,5 @@ func (r *restApi) Start() {
 
 	mapUrls(router, dependencies)
 
-	configCors := cors.DefaultConfig()
-	configCors.AllowAllOrigins = true
-	router.Use(cors.New(configCors))
-
 	router.Run(fmt.Sprintf(":%s", config.GetStringPropetyBykey(config.Port)))
 }

@@ -1,4 +1,5 @@
 package com.collectionpoint.api;
+import com.collectionpoint.api.utils.GenericResponse;
 import com.collectionpoint.model.CollectionPoint;
 import com.collectionpoint.model.dto.CollectionPointFilter;
 import com.collectionpoint.model.dto.CollectionPointRequest;
@@ -18,7 +19,7 @@ public class ApiRest {
     private CollectionPointUseCase useCase;
 
     @GetMapping("/")
-    public ResponseEntity<List<CollectionPoint>> getAll(
+    public ResponseEntity<GenericResponse<List<CollectionPoint>>> getAll(
             @RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "email", required = false) String email,
@@ -38,16 +39,20 @@ public class ApiRest {
                 .country(country)
                 .status(status)
                 .build();
-        return new ResponseEntity<>(useCase.getAll(cpf), HttpStatus.OK);
+
+        GenericResponse<List<CollectionPoint>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAll(cpf), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CollectionPoint> getById(@PathVariable(name = "id") Integer id) {
-        return new ResponseEntity<>(useCase.getById(id), HttpStatus.OK);
+    public ResponseEntity<GenericResponse<CollectionPoint>> getById(@PathVariable(name = "id") Integer id) {
+        GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getById(id), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/request")
-    public ResponseEntity<CollectionPoint> request(@RequestBody CollectionPointRequest collectionPointRequest) {
-        return new ResponseEntity<>(useCase.requestCollectionPoint(collectionPointRequest), HttpStatus.CREATED);
+    public ResponseEntity<GenericResponse<CollectionPoint>> request(@RequestBody CollectionPointRequest collectionPointRequest) {
+        GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.CREATED.value(), useCase.requestCollectionPoint(collectionPointRequest), "CREATED SUCCESSFULLY");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

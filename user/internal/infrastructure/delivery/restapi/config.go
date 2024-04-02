@@ -21,6 +21,10 @@ func (r *restApi) Start() {
 
 	router := gin.Default()
 
+	configCors := cors.DefaultConfig()
+	configCors.AllowAllOrigins = true
+	router.Use(cors.New(configCors))
+
 	mapUrls(router, dependencies)
 
 	configCors := cors.DefaultConfig()

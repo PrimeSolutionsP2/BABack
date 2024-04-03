@@ -171,6 +171,7 @@ modules.xml
 
 # Package Files #
 *.jar
+!collectionPoint.jar
 *.war
 *.nar
 *.ear

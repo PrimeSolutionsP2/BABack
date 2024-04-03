@@ -26,8 +26,9 @@ implements CollectionPointRepository
         List<CollectionPoint> result = new ArrayList<>();
         this.repository.findByFilters(
                 collectionPointFilter.getUserId(),
-                collectionPointFilter.getName(),
+                collectionPointFilter.getUserName(),
                 collectionPointFilter.getEmail(),
+                collectionPointFilter.getName(),
                 collectionPointFilter.getAddress(),
                 collectionPointFilter.getCity(),
                 collectionPointFilter.getState(),

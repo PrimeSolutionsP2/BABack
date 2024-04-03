@@ -7,12 +7,13 @@ import lombok.Data;
 @Builder
 public class CollectionPointFilter {
 
-    public String userId;
-    public String name;
-    public String email;
-    public String address;
-    public String city;
-    public String state;
-    public String country;
-    public String status;
+    private String userId;
+    private String userName;
+    private String email;
+    private String name;
+    private String address;
+    private String city;
+    private String state;
+    private String country;
+    private String status;
 }

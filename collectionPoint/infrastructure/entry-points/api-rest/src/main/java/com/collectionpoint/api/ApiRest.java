@@ -21,8 +21,9 @@ public class ApiRest {
     @GetMapping("/")
     public ResponseEntity<GenericResponse<List<CollectionPoint>>> getAll(
             @RequestParam(name = "userId", required = false) String userId,
-            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "userName", required = false) String userName,
             @RequestParam(name = "email", required = false) String email,
+            @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "address", required = false) String address,
             @RequestParam(name = "city", required = false) String city,
             @RequestParam(name = "state", required = false) String state,
@@ -32,8 +33,9 @@ public class ApiRest {
         try{
             CollectionPointFilter cpf = CollectionPointFilter.builder()
                     .userId(userId)
-                    .name(name)
+                    .userName(userName)
                     .email(email)
+                    .name(name)
                     .address(address)
                     .city(city)
                     .state(state)

@@ -13,6 +13,7 @@ public class CollectionPointEntity {
     @Column(name = "user_id")
     private String userId;
     private String address;
+    private String name;
     @Column(name = "agreement_code")
     private String agreement;
     private String city;

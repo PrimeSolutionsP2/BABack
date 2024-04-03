@@ -17,7 +17,7 @@ public class RestConsumer implements UserConsumerRespository {
     public Mono<UserResponse> createUser(CollectionPointRequest collectionPointRequest) {
         ObjectRequest request = ObjectRequest.builder()
                 .id(collectionPointRequest.getUserId())
-                .name(collectionPointRequest.getName())
+                .name(collectionPointRequest.getUserName())
                 .last_name(collectionPointRequest.getLastName())
                 .phone_number(collectionPointRequest.getPhoneNumber())
                 .mail(collectionPointRequest.getEmail())

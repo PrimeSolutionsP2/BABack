@@ -6,6 +6,7 @@ import lombok.Data;
 public class CollectionPoint {
     private int id;
     private String userId;
+    private String name;
     private String agreement;
     private String address;
     private String city;

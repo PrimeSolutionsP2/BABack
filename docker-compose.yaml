@@ -1,0 +1,18 @@
+version: '3'
+services:
+  user_api:
+    build: ./user/
+    networks:
+      - host
+  collection_points_api:
+    build: ./collectionPoints/deployment/
+    depends_on:
+      - user_api
+    networks:
+      - host
+  collection_api:
+    build: ./Collections/
+    networks:
+      - host
+networks:
+  host:

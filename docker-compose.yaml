@@ -2,17 +2,12 @@ version: '3'
 services:
   user_api:
     build: ./user/
-    networks:
-      - host
+    network_mode: "host"
   collection_points_api:
     build: ./collectionPoints/deployment/
     depends_on:
       - user_api
-    networks:
-      - host
+    network_mode: "host"
   collection_api:
     build: ./Collections/
-    networks:
-      - host
-networks:
-  host:
+    network_mode: "host"

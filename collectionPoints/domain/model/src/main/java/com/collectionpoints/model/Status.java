@@ -1,8 +1,10 @@
 package com.collectionpoints.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Status {
     private int id;
     private String name;

@@ -45,7 +45,7 @@ implements CollectionPointRepository
     }
 
     @Override
-    public CollectionPoint create(CollectionPointRequest collectionPointRequest) {
-        return this.save(this.mapper.map(collectionPointRequest, CollectionPoint.class));
+    public CollectionPoint create(CollectionPoint collectionPoint) {
+        return this.save(this.mapper.map(collectionPoint, CollectionPoint.class));
     }
 }

@@ -1,19 +1,14 @@
 package com.collectionpoints.model.dto;
 
-import lombok.Data;
+import com.collectionpoints.model.CollectionPoint;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class CollectionPointRequest {
-    private String userId;
+@Getter
+@Setter
+public class CollectionPointRequest extends CollectionPoint {
     private String userName;
     private String lastName;
     private String email;
     private String phoneNumber;
-    private String name;
-    private String agreement;
-    private String address;
-    private String city;
-    private String state;
-    private String country;
-    private final int statusId = 1;
 }

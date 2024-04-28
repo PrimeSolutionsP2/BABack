@@ -1,8 +1,10 @@
 package com.collectionpoints.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class CollectionPoint {
     private int id;
     private String userId;
@@ -12,7 +14,7 @@ public class CollectionPoint {
     private String city;
     private String state;
     private String country;
-    private int statusId;
+    private int statusId = 1;
     private Status status;
 
     // TODO

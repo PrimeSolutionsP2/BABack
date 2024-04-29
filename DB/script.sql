@@ -81,7 +81,8 @@ CREATE TABLE pickup_request_status (
 INSERT INTO pickup_request_status (id, name)
 VALUES 
 (1, 'Pendiente'),
-(2, 'Completado');
+(2, 'Completado'),
+(3, 'Agendada');
  
  
 -- pickup_request table

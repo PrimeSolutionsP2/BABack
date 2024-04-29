@@ -29,6 +29,8 @@ public class PickupRequestCustomEntity {
     private String commentary;
     @Column(name = "date_create")
     private LocalDateTime dateCreate;
-    @Column(name = "pickup_request_status_id")
-    private Integer pickupRequestStatusId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pickup_request_status_id")
+    @Fetch(FetchMode.SELECT)
+    private PickupRequestStatusEntity pickupRequestStatus;
 }

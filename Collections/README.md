@@ -161,3 +161,31 @@ Example Response:
     ]
 }
 ```
+
+### Obtener estados de solicitud de recoleccion
+Endpoint: `/pickup-request-status/status`
+
+Method: `GET`
+
+Example JSON Response:
+```json
+{
+    "message": "OK",
+    "statusCode": 200,
+    "errorCode": null,
+    "data": [
+        {
+            "id": 3,
+            "name": "Agendada"
+        },
+        {
+            "id": 2,
+            "name": "Completado"
+        },
+        {
+            "id": 1,
+            "name": "Pendiente"
+        }
+    ]
+}
+```

@@ -1,5 +1,6 @@
 package co.com.collections.model.pickuprequest;
 import co.com.collections.model.collectionpoint.CollectionPointCustom;
+import co.com.collections.model.pickuprequeststatus.PickupRequestStatus;
 import co.com.collections.model.user.User;
 import lombok.*;
 //import lombok.NoArgsConstructor;
@@ -19,6 +20,6 @@ public class PickupRequestCustom {
     private LocalDateTime pickupDate;
     private String commentary;
     private LocalDateTime dateCreate;
-    private Integer pickupRequestStatusId;
+    private PickupRequestStatus pickupRequestStatus;
 
 }

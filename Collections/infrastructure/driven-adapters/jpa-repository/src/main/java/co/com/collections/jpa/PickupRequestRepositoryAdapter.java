@@ -1,13 +1,11 @@
 package co.com.collections.jpa;
 
-import co.com.collections.jpa.entity.CollectionPointCustomEntity;
-import co.com.collections.jpa.entity.PickupRequestCustomEntity;
-import co.com.collections.jpa.entity.PickupRequestEntity;
-import co.com.collections.jpa.entity.UserEntity;
+import co.com.collections.jpa.entity.*;
 import co.com.collections.jpa.helper.AdapterOperations;
 import co.com.collections.model.collectionpoint.CollectionPointCustom;
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
+import co.com.collections.model.pickuprequeststatus.PickupRequestStatus;
 import co.com.collections.model.user.User;
 import lombok.RequiredArgsConstructor;
 import org.reactivecommons.utils.ObjectMapper;
@@ -56,7 +54,7 @@ implements co.com.collections.model.pickuprequest.gateways.PickupRequestReposito
         for (PickupRequestCustomEntity pickupRequestEntity : pickupRequestEntities ) {
             UserEntity userEntity = pickupRequestEntity.getUser();
             User user = null;
-            if (userEntity != null) { // Verificar si el usuario asociado existe
+            if (userEntity != null) {
                 user = User.builder()
                         .id(userEntity.getId())
                         .name(userEntity.getName())
@@ -85,10 +83,18 @@ implements co.com.collections.model.pickuprequest.gateways.PickupRequestReposito
                     .state(collectionPointCustomEntity.getState())
                     .country(collectionPointCustomEntity.getCountry())
                     .build();
-
+            PickupRequestStatusEntity pickupRequestStatusEntity = pickupRequestEntity.getPickupRequestStatus();
+            PickupRequestStatus pickupRequestStatus = PickupRequestStatus.builder()
+                    .id(pickupRequestStatusEntity.getId())
+                    .name(pickupRequestStatusEntity.getName())
+                    .build();
             PickupRequestCustom pickupRequest = PickupRequestCustom.builder()
                     .id(pickupRequestEntity.getId())
                     .user(user)
+                    .commentary(pickupRequestEntity.getCommentary())
+                    .pickupDate(pickupRequestEntity.getPickupDate())
+                    .dateCreate(pickupRequestEntity.getDateCreate())
+                    .pickupRequestStatus(pickupRequestStatus)
                     .collectionPoint(collectionPoint)
                     .kilograms(pickupRequestEntity.getKilograms())
                     .build();

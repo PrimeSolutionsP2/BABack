@@ -12,8 +12,9 @@ public interface PickupRequestCustomRepository extends CrudRepository<PickupRequ
     List<PickupRequestCustomEntity> findAll();
     @Query("SELECT pr FROM PickupRequestCustomEntity pr " +
             "INNER JOIN pr.collectionPoint cp " +
+            "INNER JOIN pr.pickupRequestStatus prs " +
             "LEFT JOIN pr.user u " +
-            "WHERE (:pickupRequestStatusId IS NULL OR pr.pickupRequestStatusId = :pickupRequestStatusId) " +
+            "WHERE (:pickupRequestStatusId IS NULL OR prs.id = :pickupRequestStatusId) " +
             "AND (:filterSearchValue IS NULL OR " +
             "cp.address LIKE %:filterSearchValue% OR " +
             "cp.city LIKE %:filterSearchValue% OR " +

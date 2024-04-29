@@ -48,4 +48,28 @@ public class CollectionPointUseCase {
         return response;
     }
 
+    public CollectionPoint updateCollectionPoint(int id, CollectionPoint collectionPoint){
+        CollectionPoint existingCollectionPoint = collectionPointRepository.getById(id);
+        CollectionPoint response = null;
+
+        if(existingCollectionPoint != null) {
+
+            if(collectionPoint.getName() != null) existingCollectionPoint.setName(collectionPoint.getName());
+
+            if(collectionPoint.getAgreement() != null) existingCollectionPoint.setAgreement(collectionPoint.getAgreement());
+
+            if(collectionPoint.getAddress() != null) existingCollectionPoint.setAddress(collectionPoint.getAddress());
+
+            if(collectionPoint.getCity() != null) existingCollectionPoint.setCity(collectionPoint.getCity());
+
+            if(collectionPoint.getState() != null) existingCollectionPoint.setState(collectionPoint.getState());
+
+            if(collectionPoint.getCountry() != null) existingCollectionPoint.setCountry(collectionPoint.getCountry());
+
+            response = collectionPointRepository.create(existingCollectionPoint);
+        }
+
+        return response;
+    }
+
 }

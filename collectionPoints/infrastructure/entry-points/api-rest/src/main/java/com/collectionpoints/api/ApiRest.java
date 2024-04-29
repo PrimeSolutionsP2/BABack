@@ -29,9 +29,9 @@ public class ApiRest {
             @RequestParam(name = "city", required = false) String city,
             @RequestParam(name = "state", required = false) String state,
             @RequestParam(name = "country", required = false) String country,
-            @RequestParam(name = "status",required = false) String status
+            @RequestParam(name = "status", required = false) String status
     ) {
-        try{
+        try {
             CollectionPointFilter cpf = CollectionPointFilter.builder()
                     .userId(userId)
                     .userName(userName)
@@ -83,6 +83,18 @@ public class ApiRest {
     public ResponseEntity<GenericResponse<CollectionPoint>> changeStatus(@PathVariable(name = "id") Integer id, @RequestBody CollectionPointStatusChange collectionPointStatusChange) {
         try {
             GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.changeStatus(id, collectionPointStatusChange), "OK");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), null, "INTERNAL SERVER ERROR");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PatchMapping("/{id}")
+    ResponseEntity<GenericResponse<CollectionPoint>> updateCollectionPoint(@PathVariable(name = "id") Integer id, @RequestBody CollectionPoint collectionPoint) {
+        try {
+            GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.updateCollectionPoint(id, collectionPoint), "OK");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

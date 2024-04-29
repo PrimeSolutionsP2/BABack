@@ -3,6 +3,7 @@ import com.collectionpoints.api.utils.GenericResponse;
 import com.collectionpoints.model.CollectionPoint;
 import com.collectionpoints.model.dto.CollectionPointFilter;
 import com.collectionpoints.model.dto.CollectionPointRequest;
+import com.collectionpoints.model.dto.CollectionPointStatusChange;
 import com.collectionpoints.usecase.CollectionPointUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -71,6 +72,18 @@ public class ApiRest {
         try {
             GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.CREATED.value(), useCase.requestCollectionPoint(collectionPointRequest), "CREATED SUCCESSFULLY");
             return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), null, "INTERNAL SERVER ERROR");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<GenericResponse<CollectionPoint>> changeStatus(@PathVariable(name = "id") Integer id, @RequestBody CollectionPointStatusChange collectionPointStatusChange) {
+        try {
+            GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.changeStatus(id, collectionPointStatusChange), "OK");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), null, "INTERNAL SERVER ERROR");

@@ -3,6 +3,7 @@ package com.collectionpoints.usecase;
 import com.collectionpoints.model.CollectionPoint;
 import com.collectionpoints.model.dto.CollectionPointFilter;
 import com.collectionpoints.model.dto.CollectionPointRequest;
+import com.collectionpoints.model.dto.CollectionPointStatusChange;
 import com.collectionpoints.model.dto.UserResponse;
 import com.collectionpoints.model.gateways.CollectionPointRepository;
 import com.collectionpoints.model.gateways.UserConsumerRespository;
@@ -33,6 +34,18 @@ public class CollectionPointUseCase {
 
         collectionPointResponse = collectionPointRepository.create(collectionPointRequest);
         return collectionPointResponse;
+    }
+
+    public CollectionPoint changeStatus(int id, CollectionPointStatusChange collectionPointStatusChange) {
+        CollectionPoint collectionPoint = collectionPointRepository.getById(id);
+        CollectionPoint response = null;
+
+        if(collectionPoint != null && collectionPointStatusChange.getStatusId() != 1) {
+            collectionPoint.setStatusId(collectionPointStatusChange.getStatusId());
+            response = collectionPointRepository.create(collectionPoint);
+        }
+
+        return response;
     }
 
 }

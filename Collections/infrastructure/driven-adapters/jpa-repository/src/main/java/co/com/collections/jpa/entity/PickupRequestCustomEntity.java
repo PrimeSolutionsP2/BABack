@@ -10,14 +10,18 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "pickup_request")
 @Data
-public class PickupRequestEntity {
+public class PickupRequestCustomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "user_id")
-    private String userId;
-    @Column(name = "collection_point_id ")
-    private Integer collectionPointId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    @Fetch(FetchMode.SELECT)
+    private UserEntity user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "collection_point_id")
+    @Fetch(FetchMode.SELECT)
+    private CollectionPointCustomEntity collectionPoint;
     private Integer kilograms;
     @Column(name = "pickup_date")
     private LocalDateTime pickupDate;

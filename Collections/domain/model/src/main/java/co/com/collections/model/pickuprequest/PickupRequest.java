@@ -1,4 +1,5 @@
 package co.com.collections.model.pickuprequest;
+import co.com.collections.model.user.User;
 import lombok.*;
 //import lombok.NoArgsConstructor;
 
@@ -10,9 +11,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class PickupRequest {
-    private String id;
+    private Integer id;
     private String userId;
-    private Long collectionPointId;
+    private Integer collectionPointId;
     private Integer kilograms;
-    LocalDateTime pickupDate;
+    private LocalDateTime pickupDate;
+    private String commentary;
+    private LocalDateTime dateCreate;
+    private Integer pickupRequestStatusId;
+
 }

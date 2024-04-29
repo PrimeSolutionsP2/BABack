@@ -1,6 +1,7 @@
 package co.com.collections.api;
 import co.com.collections.api.response.GenericResponse;
 import co.com.collections.model.pickuprequest.PickupRequest;
+import co.com.collections.model.pickuprequest.PickupRequestCustom;
 import co.com.collections.usecase.pickuprequest.PickupRequestUseCase;
 import co.com.collections.util.validator.ValidationException;
 import co.com.collections.api.validator.PickupRequestValidator;
@@ -41,8 +42,8 @@ public class PickupRequestRest {
 
     }
 
-    @GetMapping(path = "/requestCollections")
-    public ResponseEntity<GenericResponse<List<PickupRequest>>> getRequestCollections() {
-        return ResponseEntity.ok(new GenericResponse<List<PickupRequest>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequests()));
+    @GetMapping(path = "/requestCollectionsAdmin")
+    public ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsAdmin(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue) {
+        return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustom(pickupRequestStatusId, filterSearchValue)));
     }
 }

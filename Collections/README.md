@@ -47,7 +47,7 @@ Este módulo es el más externo de la arquitectura, es el encargado de ensamblar
 **Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
 
 
-## Contatos
+## Contractos
 
 ### Creacion de solicitud de recoleccion
 Endpoint: `/collections/createRequestCollection`
@@ -90,6 +90,7 @@ Example response:
 
 ### Obtener solicitudes de recoleccion como administrador con filtro
 Description: Obtener solicitudes de recoleccion con informacion de los puntos de recoleccion y el recolector asignado en caso de tener. Ademas con la posibilidad de agregar filtros
+
 El filtro que aplica es de los siguientes campos obteniendo valor para los que aplique:
 * Estado de la solicitud
 * Dirección del punto de acopio
@@ -99,8 +100,11 @@ El filtro que aplica es de los siguientes campos obteniendo valor para los que a
 * Nombre del recolector
 * Apellido del recolector
 * Correo del recolector
+
 Endpoint: `/collections/createRequestCollection`
+
 Method: `GET`
+
 Optional Query String parameters in Request:
 * pickupRequestStatusId: Long
 * filterSearchValue: String

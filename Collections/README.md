@@ -101,7 +101,7 @@ El filtro que aplica es de los siguientes campos obteniendo valor para los que a
 * Apellido del recolector
 * Correo del recolector
 
-Endpoint: `/collections/createRequestCollection`
+Endpoint: `/collections/requestCollectionsAdmin`
 
 Method: `GET`
 
@@ -187,5 +187,34 @@ Example JSON Response:
             "name": "Pendiente"
         }
     ]
+}
+```
+
+### Asignar recolector o fecha a solicitud de recoleccion por parte del administrador
+Endpoint: `/collections/updateRecollectorOrPickupDate`
+
+Method: `POST`
+Required JSON parameters in Request:
+* pickupRequestId: Long
+
+Optional JSON parameters in Request:
+* pickupDate: LocalDateTime
+* recollectorId: String
+
+Example JSON Request:
+```json
+{
+    "pickupRequestId": "6",
+    "pickupDate": "2024-03-29T14:00:00",
+    "recollectorId": "Cedula2"
+}
+```
+Example JSON Response:
+```json
+{
+    "message": "Solicitud de recogida actualizada exitosamente",
+    "statusCode": 200,
+    "errorCode": null,
+    "data": null
 }
 ```

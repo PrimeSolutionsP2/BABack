@@ -3,6 +3,7 @@ import co.com.collections.api.response.GenericResponse;
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
 import co.com.collections.usecase.pickuprequest.PickupRequestUseCase;
+import co.com.collections.usecase.pickuprequest.dto.UpdatePickupRequestRecollectorAndPickupDateDTO;
 import co.com.collections.util.validator.ValidationException;
 import co.com.collections.api.validator.PickupRequestValidator;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,19 @@ public class PickupRequestRest {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new GenericResponse<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
         }
 
+    }
+
+    @PostMapping(path = "/updateRecollectorOrPickupDate")
+    public ResponseEntity<GenericResponse<Void>> updateRecollectorOrPickupDate(@RequestBody UpdatePickupRequestRecollectorAndPickupDateDTO updatePickupRequestRecollectorAndPickupDateDTO) {
+        try {
+            useCase.updatePickupRequestRecollectorAndPickupDate(updatePickupRequestRecollectorAndPickupDateDTO);
+            return ResponseEntity.ok(new GenericResponse<>("Solicitud de recogida actualizada exitosamente", HttpStatus.OK.value(), null));
+        } catch (Exception e) {
+            if (e instanceof IllegalArgumentException || e instanceof ValidationException) {
+                return ResponseEntity.badRequest().body(new GenericResponse<>(e.getMessage(), HttpStatus.BAD_REQUEST.value(), null));
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new GenericResponse<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
     }
 
     @GetMapping(path = "/requestCollectionsAdmin")

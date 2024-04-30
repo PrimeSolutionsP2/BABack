@@ -39,7 +39,7 @@ implements co.com.collections.model.pickuprequest.gateways.PickupRequestReposito
 
     @Override
     public PickupRequest updatePickupRequest(PickupRequest pickupRequest) {
-        return null;
+        return this.save(pickupRequest);
     }
 
     @Override

@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ExceptionHandlerController {
+public class ExceptionController {
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<GenericResponse> handleCustomError(CustomException e) {
-        GenericResponse response = new GenericResponse(e.getStatusCode(), null, e.getMessage());
+    public ResponseEntity<ExceptionResponse> handleCustomError(CustomException e) {
+        ExceptionResponse response = new ExceptionResponse(e.getStatusCode(), e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.valueOf(e.getStatusCode()));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<GenericResponse> handleCustomError(Exception e) {
+    public ResponseEntity<ExceptionResponse> handleCustomError(Exception e) {
         e.printStackTrace();
-        GenericResponse response = new GenericResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), null, "INTERNAL SERVER ERROR");
+        ExceptionResponse response = new ExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL SERVER ERROR");
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

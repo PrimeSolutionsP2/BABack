@@ -4,6 +4,7 @@ import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
 import co.com.collections.model.pickuprequest.gateways.PickupRequestRepository;
 import co.com.collections.usecase.pickuprequest.dto.UpdatePickupRequestRecollectorAndPickupDateDTO;
+import co.com.collections.usecase.pickuprequeststatus.PickupRequestStatusUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
@@ -38,7 +39,14 @@ public class PickupRequestUseCase {
     }
 
     public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue) {
-        return pickupRequestRepository.getPickupRequestsCustom(pickupRequestStatusId, searchFilterValue);
+        return pickupRequestRepository.getPickupRequestsCustom(pickupRequestStatusId, searchFilterValue, null);
+    }
+
+    public List<PickupRequestCustom> getPickupRequestsCustomRecollector(Integer pickupRequestStatusId, String searchFilterValue, String recollectorId) {
+        if(recollectorId == null || recollectorId.isEmpty()) {
+            throw new IllegalArgumentException("El id del recolector no puede ser nulo o vacío");
+        }
+        return pickupRequestRepository.getPickupRequestsCustom(pickupRequestStatusId, searchFilterValue, recollectorId);
     }
 
     public void updatePickupRequestRecollectorAndPickupDate(UpdatePickupRequestRecollectorAndPickupDateDTO updatePickupRequestRecollectorAndPickupDateDTO) {
@@ -57,6 +65,10 @@ public class PickupRequestUseCase {
         }
         if(updatePickupRequestRecollectorAndPickupDateDTO.getRecollectorId() != null) {
             pickupRequest.setUserId(updatePickupRequestRecollectorAndPickupDateDTO.getRecollectorId());
+        }
+
+        if(pickupRequest.getPickupDate() != null && pickupRequest.getUserId() != null) {
+            pickupRequest.setPickupRequestStatusId(PickupRequestStatusUseCase.PICKUP_REQUEST_STATUS_ID_SCHEDULED);
         }
         pickupRequestRepository.updatePickupRequest(pickupRequest);
     }

@@ -1,4 +1,4 @@
-# Proyecto Base Implementando Clean Architecture
+ # Proyecto Base Implementando Clean Architecture
 
 ## Antes de Iniciar
 
@@ -217,4 +217,33 @@ Example JSON Response:
     "errorCode": null,
     "data": null
 }
+```
+
+### Obtener solicitudes de recoleccion como recolector con filtro
+Description: Obtener solicitudes de recoleccion con informacion de los puntos de recoleccion y el recolector asignado en caso de tener. Ademas con la posibilidad de agregar filtros
+
+El filtro que aplica es de los siguientes campos obteniendo valor para los que aplique:
+* Estado de la solicitud
+* Dirección del punto de acopio
+* Ciudad del punto de acopio
+* Departamento del punto de acopio
+* Pais del punto de acopio
+* Nombre del recolector
+* Apellido del recolector
+* Correo del recolector
+
+Endpoint: `/collections/requestCollectionsRecollector`
+
+Method: `GET`
+
+Optional Query String parameters in Request:
+* pickupRequestStatusId: Long
+* filterSearchValue: String
+
+Example:
+```
+http://localhost:8081/collections/requestCollectionsAdmin
+http://localhost:8081/collections/requestCollectionsAdmin?pickupRequestStatusId=1
+http://localhost:8081/collections/requestCollectionsAdmin?pickupRequestStatusId=1&filterSearchValue=2024-03-29
+http://localhost:8081/collections/requestCollectionsAdmin?filterSearchValue=2024-03-29
 ```

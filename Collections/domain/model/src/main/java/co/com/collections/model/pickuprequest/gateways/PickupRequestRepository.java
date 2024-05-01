@@ -11,6 +11,6 @@ public interface PickupRequestRepository {
     PickupRequest updatePickupRequest(PickupRequest pickupRequest);
     PickupRequest createPickupRequest(PickupRequest pickupRequest);
 
-    List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue);
+    List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue, String recollectorUserId);
 
 }

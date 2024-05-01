@@ -60,4 +60,16 @@ public class PickupRequestRest {
     public ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsAdmin(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue) {
         return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustom(pickupRequestStatusId, filterSearchValue)));
     }
+
+    @GetMapping(path = "/requestCollectionsRecollector")
+    public  ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsRecollector(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue, @RequestParam(required = false) String recollectorId) {
+        try {
+            return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustomRecollector(pickupRequestStatusId, filterSearchValue, recollectorId)));
+        } catch (Exception e) {
+            if (e instanceof IllegalArgumentException || e instanceof ValidationException) {
+                return ResponseEntity.badRequest().body(new GenericResponse<>(e.getMessage(), HttpStatus.BAD_REQUEST.value(), null));
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new GenericResponse<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
+    }
 }

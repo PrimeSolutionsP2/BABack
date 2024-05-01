@@ -48,8 +48,8 @@ implements co.com.collections.model.pickuprequest.gateways.PickupRequestReposito
     }
 
     @Override
-    public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue) {
-        List<PickupRequestCustomEntity> pickupRequestEntities  = this.repositoryCustom.findByFilters(pickupRequestStatusId, searchFilterValue);
+    public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue, String recollectorUserId) {
+        List<PickupRequestCustomEntity> pickupRequestEntities  = this.repositoryCustom.findByFilters(pickupRequestStatusId, searchFilterValue, recollectorUserId);
         List<PickupRequestCustom> pickupRequests  = new ArrayList<>();
         for (PickupRequestCustomEntity pickupRequestEntity : pickupRequestEntities ) {
             UserEntity userEntity = pickupRequestEntity.getUser();

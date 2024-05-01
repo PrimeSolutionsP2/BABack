@@ -3,6 +3,7 @@ package co.com.collections.usecase.pickuprequest;
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
 import co.com.collections.model.pickuprequest.gateways.PickupRequestRepository;
+import co.com.collections.usecase.pickuprequest.dto.CompletePickupRequestDTO;
 import co.com.collections.usecase.pickuprequest.dto.UpdatePickupRequestRecollectorAndPickupDateDTO;
 import co.com.collections.usecase.pickuprequeststatus.PickupRequestStatusUseCase;
 import lombok.RequiredArgsConstructor;
@@ -76,5 +77,17 @@ public class PickupRequestUseCase {
     private boolean isFutureDateTime(LocalDateTime dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         return dateTime.isAfter(currentDateTime);
+    }
+
+    public void completePickupRequest(CompletePickupRequestDTO completePickupRequest) {
+        PickupRequest pickupRequest = pickupRequestRepository.getPickupRequest(completePickupRequest.getPickupRequestId());
+        if(pickupRequest.getPickupRequestStatusId() != PickupRequestStatusUseCase.PICKUP_REQUEST_STATUS_ID_SCHEDULED) {
+            throw new IllegalArgumentException("La solicitud de recogida no está programada");
+        }
+
+        pickupRequest.setKilograms(completePickupRequest.getKilogramsRecolected());
+        pickupRequest.setPickupRequestStatusId(PickupRequestStatusUseCase.PICKUP_REQUEST_STATUS_ID_COMPLETE);
+        pickupRequest.setCommentary(completePickupRequest.getAditionalCommentary());
+        pickupRequestRepository.updatePickupRequest(pickupRequest);
     }
 }

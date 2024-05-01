@@ -3,6 +3,7 @@ import co.com.collections.api.response.GenericResponse;
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
 import co.com.collections.usecase.pickuprequest.PickupRequestUseCase;
+import co.com.collections.usecase.pickuprequest.dto.CompletePickupRequestDTO;
 import co.com.collections.usecase.pickuprequest.dto.UpdatePickupRequestRecollectorAndPickupDateDTO;
 import co.com.collections.util.validator.ValidationException;
 import co.com.collections.api.validator.PickupRequestValidator;
@@ -65,6 +66,20 @@ public class PickupRequestRest {
     public  ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsRecollector(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue, @RequestParam(required = false) String recollectorId) {
         try {
             return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustomRecollector(pickupRequestStatusId, filterSearchValue, recollectorId)));
+        } catch (Exception e) {
+            if (e instanceof IllegalArgumentException || e instanceof ValidationException) {
+                return ResponseEntity.badRequest().body(new GenericResponse<>(e.getMessage(), HttpStatus.BAD_REQUEST.value(), null));
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new GenericResponse<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
+    }
+
+    @PostMapping(path = "/completeRequestCollection")
+    public ResponseEntity<GenericResponse<Void>> completeRequestCollection(@RequestBody CompletePickupRequestDTO completePickupRequest) {
+        try {
+            validator.validateCompletePickupRequestDTO(completePickupRequest);
+            useCase.completePickupRequest(completePickupRequest);
+            return ResponseEntity.ok(new GenericResponse<>("Solicitud de recogida completada exitosamente", HttpStatus.OK.value(), null));
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException || e instanceof ValidationException) {
                 return ResponseEntity.badRequest().body(new GenericResponse<>(e.getMessage(), HttpStatus.BAD_REQUEST.value(), null));

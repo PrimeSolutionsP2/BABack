@@ -247,3 +247,29 @@ http://localhost:8081/collections/requestCollectionsAdmin?pickupRequestStatusId=
 http://localhost:8081/collections/requestCollectionsAdmin?pickupRequestStatusId=1&filterSearchValue=2024-03-29
 http://localhost:8081/collections/requestCollectionsAdmin?filterSearchValue=2024-03-29
 ```
+
+### Completar solicitud de recoleccion
+Endpoint: `/collections/completeRequestCollection`
+
+Method: `POST`
+
+BODY:
+```json
+{
+  "pickupRequestId": "6",
+  "kilogramsRecolected": 5,
+  "aditionalCommentary": "afsdfasfasdsa"
+}
+```
+Optional JSON parameters in Request:
+* aditionalCommentary: String
+
+Example JSON Response:
+```json
+{
+  "message": "Solicitud de recogida completada exitosamente",
+  "statusCode": 200,
+  "errorCode": null,
+  "data": null
+}
+```

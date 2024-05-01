@@ -25,15 +25,8 @@ implements CollectionPointRepository
     public List<CollectionPoint> getAll(CollectionPointFilter collectionPointFilter) {
         List<CollectionPoint> result = new ArrayList<>();
         this.repository.findByFilters(
-                collectionPointFilter.getUserId(),
-                collectionPointFilter.getUserName(),
-                collectionPointFilter.getEmail(),
-                collectionPointFilter.getName(),
-                collectionPointFilter.getAddress(),
-                collectionPointFilter.getCity(),
-                collectionPointFilter.getState(),
-                collectionPointFilter.getCountry(),
-                collectionPointFilter.getStatus()
+                collectionPointFilter.getSearch(),
+                collectionPointFilter.getStatusId()
             )
             .forEach(collectionPointEntity -> result.add(toEntity(collectionPointEntity)));
         return result;

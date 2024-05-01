@@ -22,26 +22,12 @@ public class ApiRest {
 
     @GetMapping("/")
     public ResponseEntity<GenericResponse<List<CollectionPoint>>> getAll(
-            @RequestParam(name = "userId", required = false) String userId,
-            @RequestParam(name = "userName", required = false) String userName,
-            @RequestParam(name = "email", required = false) String email,
-            @RequestParam(name = "name", required = false) String name,
-            @RequestParam(name = "address", required = false) String address,
-            @RequestParam(name = "city", required = false) String city,
-            @RequestParam(name = "state", required = false) String state,
-            @RequestParam(name = "country", required = false) String country,
-            @RequestParam(name = "status", required = false) String status
+            @RequestParam(name = "search", required = false) String search,
+            @RequestParam(name = "statusId", required = false) String statusId
     ) {
         CollectionPointFilter cpf = CollectionPointFilter.builder()
-                .userId(userId)
-                .userName(userName)
-                .email(email)
-                .name(name)
-                .address(address)
-                .city(city)
-                .state(state)
-                .country(country)
-                .status(status)
+                .search(search)
+                .statusId(statusId)
                 .build();
 
         GenericResponse<List<CollectionPoint>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAll(cpf), "OK");
@@ -60,7 +46,7 @@ public class ApiRest {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/change-status/{id}")
     public ResponseEntity<GenericResponse<CollectionPoint>> changeStatus(@PathVariable(name = "id") Integer id, @RequestBody CollectionPointStatusChange collectionPointStatusChange) throws CustomException {
         GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.changeStatus(id, collectionPointStatusChange), "OK");
         return new ResponseEntity<>(response, HttpStatus.OK);

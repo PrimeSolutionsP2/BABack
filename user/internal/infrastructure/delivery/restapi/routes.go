@@ -10,4 +10,5 @@ func mapUrls(router *gin.Engine, dependencies *Dependencies) {
 	groupPath.POST("/login/user", dependencies.loginHandler.CheckPassword)
 	groupPath.POST("/create/user", dependencies.createHandler.Create)
 	groupPath.DELETE("/delete/user/:user_id", dependencies.deleteUsecase.Delete)
+	groupPath.POST("/send/email", dependencies.emailHandler.SendEmail)
 }

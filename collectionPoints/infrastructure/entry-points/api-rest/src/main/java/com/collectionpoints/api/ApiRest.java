@@ -53,8 +53,8 @@ public class ApiRest {
     }
 
     @PatchMapping("/{id}")
-    ResponseEntity<GenericResponse<CollectionPoint>> updateCollectionPoint(@PathVariable(name = "id") Integer id, @RequestBody CollectionPoint collectionPoint) throws CustomException {
-        GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.updateCollectionPoint(id, collectionPoint), "OK");
+    ResponseEntity<GenericResponse<CollectionPoint>> updateCollectionPoint(@PathVariable(name = "id") Integer id, @RequestParam(name = "role", required = true) String role, @RequestBody CollectionPoint collectionPoint) throws CustomException {
+        GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.updateCollectionPoint(id, role, collectionPoint), "OK");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

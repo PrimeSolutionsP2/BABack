@@ -1,0 +1,34 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "collectionPoints"
+  devtools:
+    add-properties: false
+  profiles:
+    include: null
+  datasource:
+    url: "jdbc:mysql://localhost:3306/botellas_amor"
+    username: ""
+    password: ""
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+  jpa:
+    databasePlatform: "org.hibernate.dialect.MySQL8Dialect"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+adapter:
+  restconsumer:
+    timeout: 5000
+    url: "http://localhost:8082/user/v1/create/user"
+cors:
+  allowed-origins: "http://localhost:4000,http://localhost:8080"

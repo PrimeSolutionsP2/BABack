@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"github.com/PrimeSolutionsP2/BABack/user/internal/business/constant"
 	"github.com/PrimeSolutionsP2/BABack/user/internal/business/domain"
 	"github.com/PrimeSolutionsP2/BABack/user/internal/business/gateway"
 	"github.com/PrimeSolutionsP2/BABack/user/internal/infrastructure/delivery/restapi/handler/dto"
@@ -9,6 +10,7 @@ import (
 
 type GetUsecase interface {
 	GetAll(c *gin.Context) (*[]dto.UserDTO, *dto.ReponseMessageDTO)
+	GetByID(c *gin.Context, id string) (*dto.UserDTO, *dto.ReponseMessageDTO)
 }
 
 type getUsecase struct {
@@ -47,4 +49,23 @@ func (g *getUsecase) buildUsersDTO(users *[]domain.User) *[]dto.UserDTO {
 		usersDTO = append(usersDTO, userDTO)
 	}
 	return &usersDTO
+}
+
+func (g *getUsecase) GetByID(c *gin.Context, id string) (*dto.UserDTO, *dto.ReponseMessageDTO) {
+	user, err := g.readGateway.ReadById(id)
+	if err != nil {
+		return nil, &dto.ReponseMessageDTO{
+			Code:    err.Code,
+			Message: constant.UserNotFoundById,
+		}
+	}
+
+	return &dto.UserDTO{
+		Id:          user.Id,
+		Name:        user.Name,
+		LastName:    user.LastName,
+		PhoneNumber: user.PhoneNumber,
+		Mail:        user.Mail,
+		Type:        user.Type,
+	}, nil
 }

@@ -1,16 +1,19 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   application:
     name: "BaBack"
   devtools:
     add-properties: false
-  h2:
-    console:
-      enabled: true
-      path: "/h2"
   profiles:
     include: null
+  datasource:
+    url: "jdbc:mysql://localhost:3307/botellas_amor"
+    username: "root"
+    password: "password"
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+  jpa:
+    databasePlatform: "org.hibernate.dialect.MySQLDialect"
 management:
   endpoints:
     web:
@@ -21,4 +24,4 @@ management:
       probes:
         enabled: true
 cors:
-  allowed-origins: "http://localhost:4200,http://localhost:8080"
+  allowed-origins: "http://localhost:4000,http://localhost:8081"

@@ -5,6 +5,7 @@ import (
 
 	"github.com/PrimeSolutionsP2/BABack/user/internal/infrastructure/config"
 	"github.com/PrimeSolutionsP2/BABack/user/internal/infrastructure/delivery"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,6 +20,10 @@ func (r *restApi) Start() {
 	dependencies := buildDependencies()
 
 	router := gin.Default()
+
+	configCors := cors.DefaultConfig()
+	configCors.AllowAllOrigins = true
+	router.Use(cors.New(configCors))
 
 	mapUrls(router, dependencies)
 

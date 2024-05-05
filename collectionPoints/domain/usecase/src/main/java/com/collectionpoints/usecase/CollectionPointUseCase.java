@@ -71,6 +71,8 @@ public class CollectionPointUseCase {
         if(collectionPoint.getCity() != null) existingCollectionPoint.setCity(collectionPoint.getCity());
         if(collectionPoint.getState() != null) existingCollectionPoint.setState(collectionPoint.getState());
         if(collectionPoint.getCountry() != null) existingCollectionPoint.setCountry(collectionPoint.getCountry());
+        if(collectionPoint.getUserIdFile() != null) existingCollectionPoint.setUserIdFile(collectionPoint.getUserIdFile());
+        if(collectionPoint.getPlaceImage() != null) existingCollectionPoint.setPlaceImage(collectionPoint.getPlaceImage());
 
         return collectionPointRepository.create(existingCollectionPoint);
     }

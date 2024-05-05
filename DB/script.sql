@@ -61,6 +61,8 @@ CREATE TABLE collection_point (
   city VARCHAR(50) NOT NULL,
   state VARCHAR(50) NOT NULL,
   country VARCHAR(50) NOT NULL,
+  user_id_file TINYINT(1) NOT NULL DEFAULT 0,
+  place_image TINYINT(1) NOT NULL DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (status_id) REFERENCES status(id)
 );

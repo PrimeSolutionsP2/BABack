@@ -71,6 +71,15 @@ public class CollectionPointUseCase {
         if(collectionPoint.getCity() != null) existingCollectionPoint.setCity(collectionPoint.getCity());
         if(collectionPoint.getState() != null) existingCollectionPoint.setState(collectionPoint.getState());
         if(collectionPoint.getCountry() != null) existingCollectionPoint.setCountry(collectionPoint.getCountry());
+        if(collectionPoint.getUserIdFile() != null) existingCollectionPoint.setUserIdFile(collectionPoint.getUserIdFile());
+        if(collectionPoint.getPlaceImage() != null) existingCollectionPoint.setPlaceImage(collectionPoint.getPlaceImage());
+
+        if(role.equals("2") || role.equals("RECOLECTOR")){
+            throw new CustomException(HttpStatusCode.BAD_REQUEST.getCode(), "As a recolector it is not possible to update the information of a collection point");
+        }
+        else if(role.equals("3") || role.equals("REPRESENTANTE")) {
+            existingCollectionPoint.setStatusId(1);
+        }
 
         if(role.equals("2") || role.equals("RECOLECTOR")){
             throw new CustomException(HttpStatusCode.BAD_REQUEST.getCode(), "As a recolector it is not possible to update the information of a collection point");

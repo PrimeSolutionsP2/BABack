@@ -18,6 +18,7 @@ type Dependencies struct {
 	createHandler handler.CreateHandler
 	getUsecase    handler.GetHandler
 	deleteUsecase handler.DeleteHandler
+	emailHandler  handler.EmailHandler
 }
 
 func buildDependencies() *Dependencies {
@@ -43,6 +44,7 @@ func buildDependencies() *Dependencies {
 	createUsecase := usecase.NewCreateUsecase(readGateway, createGateway, emailGateway)
 	getUsecase := usecase.NewGetUsecase(readGateway)
 	deleteUsecase := usecase.NewDeleteUsecase(deleteGateway)
+	sendEmailUsecase := usecase.NewEmailUsecase(emailGateway)
 
 	return &Dependencies{
 		pingHandler:   handler.NewPingHandler(),
@@ -50,5 +52,6 @@ func buildDependencies() *Dependencies {
 		createHandler: handler.NewCreateHandler(createUsecase),
 		getUsecase:    handler.NewGetHandler(getUsecase),
 		deleteUsecase: handler.NewDeleteHandler(deleteUsecase),
+		emailHandler:  handler.NewEmailHandler(sendEmailUsecase),
 	}
 }

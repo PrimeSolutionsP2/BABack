@@ -17,25 +17,17 @@ public interface JPARepository extends CrudRepository<CollectionPointEntity, Int
             "JOIN user AS us " +
             "ON cp.user_id = us.id " +
             "WHERE " +
-            "(:userId IS NULL OR us.id LIKE %:userId%) AND " +
-            "(:userName IS NULL OR us.name LIKE %:userName%) AND " +
-            "(:email IS NULL OR us.email LIKE %:email%) AND " +
-            "(:name IS NULL OR cp.name LIKE %:name%) AND " +
-            "(:address IS NULL OR cp.address LIKE %:address%) AND " +
-            "(:city IS NULL OR cp.city LIKE %:city%) AND " +
-            "(:state IS NULL OR cp.state LIKE %:state%) AND " +
-            "(:country IS NULL OR cp.country LIKE %:country%) AND " +
-            "(:stat IS NULL OR cp.status_id = :stat)",
+            "(:search IS NULL OR " +
+            "us.id LIKE %:search% OR " +
+            "cp.name LIKE %:search% OR " +
+            "cp.address LIKE %:search% OR " +
+            "cp.city LIKE %:search% OR " +
+            "cp.state LIKE %:search% OR " +
+            "cp.country LIKE %:search%) AND " +
+            "(:statusId IS NULL OR cp.status_id = :statusId)",
         nativeQuery = true)
     List<CollectionPointEntity> findByFilters(
-            @Param("userId") String userId,
-            @Param("userName") String userName,
-            @Param("email") String email,
-            @Param("name") String name,
-            @Param("address") String address,
-            @Param("city") String city,
-            @Param("state") String state,
-            @Param("country") String country,
-            @Param("stat") String status
+            @Param("search") String search,
+            @Param("statusId") String statusId
     );
 }

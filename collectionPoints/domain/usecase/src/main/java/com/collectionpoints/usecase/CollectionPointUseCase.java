@@ -81,6 +81,13 @@ public class CollectionPointUseCase {
             existingCollectionPoint.setStatusId(1);
         }
 
+        if(role.equals("2") || role.equals("RECOLECTOR")){
+            throw new CustomException(HttpStatusCode.BAD_REQUEST.getCode(), "As a recolector it is not possible to update the information of a collection point");
+        }
+        else if(role.equals("3") || role.equals("REPRESENTANTE")) {
+            existingCollectionPoint.setStatusId(1);
+        }
+
         return collectionPointRepository.create(existingCollectionPoint);
     }
 

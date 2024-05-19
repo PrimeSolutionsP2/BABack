@@ -1,13 +1,22 @@
 version: '3'
 services:
+  db:
+    build: ./DB/
+    network_mode: "host"
   user_api:
     build: ./user/
     network_mode: "host"
+    depends_on:
+      - db
   collection_points_api:
     build: ./collectionPoints/deployment/
     depends_on:
       - user_api
+      - db
     network_mode: "host"
   collection_api:
     build: ./Collections/
     network_mode: "host"
+    depends_on:
+      - db
+

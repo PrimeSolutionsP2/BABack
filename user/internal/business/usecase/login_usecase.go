@@ -45,6 +45,6 @@ func (l *loginUsecase) CheckPassword(c *gin.Context, mail string, password strin
 		LastName:    user.LastName,
 		PhoneNumber: user.PhoneNumber,
 		Mail:        user.Mail,
-		Type:        user.Type,
+		Role:        user.Role,
 	}, nil
 }

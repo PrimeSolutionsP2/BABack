@@ -48,8 +48,8 @@ implements co.com.collections.model.pickuprequest.gateways.PickupRequestReposito
     }
 
     @Override
-    public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue, String recollectorUserId) {
-        List<PickupRequestCustomEntity> pickupRequestEntities  = this.repositoryCustom.findByFilters(pickupRequestStatusId, searchFilterValue, recollectorUserId);
+    public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue, String recollectorUserId, String id) {
+        List<PickupRequestCustomEntity> pickupRequestEntities  = this.repositoryCustom.findByFilters(pickupRequestStatusId, searchFilterValue, recollectorUserId,id);
         List<PickupRequestCustom> pickupRequests  = new ArrayList<>();
         for (PickupRequestCustomEntity pickupRequestEntity : pickupRequestEntities ) {
             UserEntity userEntity = pickupRequestEntity.getUser();
@@ -82,6 +82,8 @@ implements co.com.collections.model.pickuprequest.gateways.PickupRequestReposito
                     .city(collectionPointCustomEntity.getCity())
                     .state(collectionPointCustomEntity.getState())
                     .country(collectionPointCustomEntity.getCountry())
+                    .name(collectionPointCustomEntity.getName())
+                    .statusId(collectionPointCustomEntity.getStatusId())
                     .build();
             PickupRequestStatusEntity pickupRequestStatusEntity = pickupRequestEntity.getPickupRequestStatus();
             PickupRequestStatus pickupRequestStatus = PickupRequestStatus.builder()

@@ -44,6 +44,8 @@ public class PickupRequestRest {
 
     }
 
+
+    //agendar
     @PostMapping(path = "/updateRecollectorOrPickupDate")
     public ResponseEntity<GenericResponse<Void>> updateRecollectorOrPickupDate(@RequestBody UpdatePickupRequestRecollectorAndPickupDateDTO updatePickupRequestRecollectorAndPickupDateDTO) {
         try {
@@ -58,14 +60,14 @@ public class PickupRequestRest {
     }
 
     @GetMapping(path = "/requestCollectionsAdmin")
-    public ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsAdmin(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue) {
-        return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustom(pickupRequestStatusId, filterSearchValue)));
+    public ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsAdmin(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue,String id) {
+        return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustom(pickupRequestStatusId, filterSearchValue,id)));
     }
 
     @GetMapping(path = "/requestCollectionsRecollector")
-    public  ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsRecollector(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue, @RequestParam(required = false) String recollectorId) {
+    public  ResponseEntity<GenericResponse<List<PickupRequestCustom>>> getRequestCollectionsRecollector(@RequestParam(required = false) Integer pickupRequestStatusId, @RequestParam(required = false) String filterSearchValue, @RequestParam(required = false) String recollectorId, @RequestParam(required = false) String id) {
         try {
-            return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustomRecollector(pickupRequestStatusId, filterSearchValue, recollectorId)));
+            return ResponseEntity.ok(new GenericResponse<List<PickupRequestCustom>>("OK", HttpStatus.OK.value(), null, useCase.getPickupRequestsCustomRecollector(pickupRequestStatusId, filterSearchValue, recollectorId,id)));
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException || e instanceof ValidationException) {
                 return ResponseEntity.badRequest().body(new GenericResponse<>(e.getMessage(), HttpStatus.BAD_REQUEST.value(), null));

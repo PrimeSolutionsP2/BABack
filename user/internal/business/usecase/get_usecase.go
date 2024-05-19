@@ -44,7 +44,7 @@ func (g *getUsecase) buildUsersDTO(users *[]domain.User) *[]dto.UserDTO {
 			LastName:    user.LastName,
 			PhoneNumber: user.PhoneNumber,
 			Mail:        user.Mail,
-			Type:        user.Type,
+			Role:        user.Role,
 		}
 		usersDTO = append(usersDTO, userDTO)
 	}
@@ -66,6 +66,6 @@ func (g *getUsecase) GetByID(c *gin.Context, id string) (*dto.UserDTO, *dto.Repo
 		LastName:    user.LastName,
 		PhoneNumber: user.PhoneNumber,
 		Mail:        user.Mail,
-		Type:        user.Type,
+		Role:        user.Role,
 	}, nil
 }

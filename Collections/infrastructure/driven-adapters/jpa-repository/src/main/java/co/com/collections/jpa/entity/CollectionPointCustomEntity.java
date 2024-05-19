@@ -26,4 +26,8 @@ public class CollectionPointCustomEntity {
     private String state;
     @Column(name = "country")
     private String country;
+    @Column(name="name")
+    private String name;
+    @Column(name="status_id")
+    private int statusId;
 }

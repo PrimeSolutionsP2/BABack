@@ -16,7 +16,7 @@ public class PickupRequestEntity {
     private Integer id;
     @Column(name = "user_id")
     private String userId;
-    @Column(name = "collection_point_id ")
+    @Column(name = "collection_point_id")
     private Integer collectionPointId;
     private Integer kilograms;
     @Column(name = "pickup_date")

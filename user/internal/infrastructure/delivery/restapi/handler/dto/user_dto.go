@@ -6,5 +6,5 @@ type UserDTO struct {
 	LastName    string `json:"last_name"`
 	PhoneNumber string `json:"phone_number,omitempty"`
 	Mail        string `json:"mail,omitempty"`
-	Type        string `json:"type,omitempty"`
+	Role        int 	`json:"role,omitempty"`
 }

@@ -39,15 +39,15 @@ public class PickupRequestUseCase {
         return pickupRequestRepository.createPickupRequest(pickupRequest);
     }
 
-    public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue) {
-        return pickupRequestRepository.getPickupRequestsCustom(pickupRequestStatusId, searchFilterValue, null);
+    public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue, String id) {
+        return pickupRequestRepository.getPickupRequestsCustom(pickupRequestStatusId, searchFilterValue, null,id);
     }
 
-    public List<PickupRequestCustom> getPickupRequestsCustomRecollector(Integer pickupRequestStatusId, String searchFilterValue, String recollectorId) {
+    public List<PickupRequestCustom> getPickupRequestsCustomRecollector(Integer pickupRequestStatusId, String searchFilterValue, String recollectorId, String id) {
         if(recollectorId == null || recollectorId.isEmpty()) {
             throw new IllegalArgumentException("El id del recolector no puede ser nulo o vacío");
         }
-        return pickupRequestRepository.getPickupRequestsCustom(pickupRequestStatusId, searchFilterValue, recollectorId);
+        return pickupRequestRepository.getPickupRequestsCustom(pickupRequestStatusId, searchFilterValue, recollectorId,id);
     }
 
     public void updatePickupRequestRecollectorAndPickupDate(UpdatePickupRequestRecollectorAndPickupDateDTO updatePickupRequestRecollectorAndPickupDateDTO) {
@@ -68,7 +68,7 @@ public class PickupRequestUseCase {
             pickupRequest.setUserId(updatePickupRequestRecollectorAndPickupDateDTO.getRecollectorId());
         }
 
-        if(pickupRequest.getPickupDate() != null && pickupRequest.getUserId() != null) {
+        if(pickupRequest.getPickupDate() != null && pickupRequest.getUserId() != null && pickupRequest.getPickupRequestStatusId() != 2) {
             pickupRequest.setPickupRequestStatusId(PickupRequestStatusUseCase.PICKUP_REQUEST_STATUS_ID_SCHEDULED);
         }
         pickupRequestRepository.updatePickupRequest(pickupRequest);
@@ -87,7 +87,6 @@ public class PickupRequestUseCase {
 
         pickupRequest.setKilograms(completePickupRequest.getKilogramsRecolected());
         pickupRequest.setPickupRequestStatusId(PickupRequestStatusUseCase.PICKUP_REQUEST_STATUS_ID_COMPLETE);
-        pickupRequest.setCommentary(completePickupRequest.getAditionalCommentary());
         pickupRequestRepository.updatePickupRequest(pickupRequest);
     }
 }

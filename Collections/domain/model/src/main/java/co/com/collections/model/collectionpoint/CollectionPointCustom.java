@@ -17,4 +17,5 @@ public class CollectionPointCustom {
        private String city;
        private String state;
        private String country;
+       private String name;
 }

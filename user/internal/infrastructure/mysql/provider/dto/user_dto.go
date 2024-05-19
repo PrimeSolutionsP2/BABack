@@ -7,5 +7,5 @@ type UserDTO struct {
 	PhoneNumber string
 	Mail        string
 	Password    string
-	Type        string
+	Role        int
 }

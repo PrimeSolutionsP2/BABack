@@ -43,7 +43,7 @@ func (r *readProvider) ReadByMail(mail string) (*domain.User, *domain.ErrorMessa
 
 	row := stmt.QueryRow(mail)
 
-	err = row.Scan(&userDTO.Id, &userDTO.Name, &userDTO.LastName, &userDTO.PhoneNumber, &userDTO.Mail, &userDTO.Password, &userDTO.Type)
+	err = row.Scan(&userDTO.Id, &userDTO.Name, &userDTO.LastName, &userDTO.PhoneNumber, &userDTO.Mail, &userDTO.Password, &userDTO.Role)
 	if err != nil {
 		return nil, &domain.ErrorMessage{
 			Code:    http.StatusNotFound,
@@ -57,7 +57,7 @@ func (r *readProvider) ReadByMail(mail string) (*domain.User, *domain.ErrorMessa
 		PhoneNumber: userDTO.PhoneNumber,
 		Mail:        userDTO.Mail,
 		Password:    userDTO.Password,
-		Type:        userDTO.Type,
+		Role:        userDTO.Role,
 	}, nil
 }
 
@@ -77,7 +77,7 @@ func (r *readProvider) ReadById(id string) (*domain.User, *domain.ErrorMessage) 
 
 	row := stmt.QueryRow(id)
 
-	err = row.Scan(&userDTO.Id, &userDTO.Name, &userDTO.LastName, &userDTO.PhoneNumber, &userDTO.Mail, &userDTO.Password, &userDTO.Type)
+	err = row.Scan(&userDTO.Id, &userDTO.Name, &userDTO.LastName, &userDTO.PhoneNumber, &userDTO.Mail, &userDTO.Password, &userDTO.Role)
 	if err != nil {
 		return nil, &domain.ErrorMessage{
 			Code:    http.StatusNotFound,
@@ -91,7 +91,7 @@ func (r *readProvider) ReadById(id string) (*domain.User, *domain.ErrorMessage) 
 		PhoneNumber: userDTO.PhoneNumber,
 		Mail:        userDTO.Mail,
 		Password:    userDTO.Password,
-		Type:        userDTO.Type,
+		Role:        userDTO.Role,
 	}, nil
 }
 
@@ -111,7 +111,7 @@ func (r *readProvider) ReadAll() (*[]domain.User, *domain.ErrorMessage) {
 
 	for rows.Next() {
 		var userDTO dto.UserDTO
-		err = rows.Scan(&userDTO.Id, &userDTO.Name, &userDTO.LastName, &userDTO.PhoneNumber, &userDTO.Mail, &userDTO.Password, &userDTO.Type)
+		err = rows.Scan(&userDTO.Id, &userDTO.Name, &userDTO.LastName, &userDTO.PhoneNumber, &userDTO.Mail, &userDTO.Password, &userDTO.Role)
 		if err != nil {
 			return nil, &domain.ErrorMessage{
 				Code:    http.StatusInternalServerError,
@@ -133,7 +133,7 @@ func (r *readProvider) buildUsersDomain(usersDTO *[]dto.UserDTO) *[]domain.User 
 			PhoneNumber: dto.PhoneNumber,
 			Mail:        dto.Mail,
 			Password:    dto.Password,
-			Type:        dto.Type,
+			Role:        dto.Role,
 		}
 		users = append(users, user)
 	}

@@ -15,6 +15,7 @@ public interface PickupRequestCustomRepository extends CrudRepository<PickupRequ
             "INNER JOIN pr.pickupRequestStatus prs " +
             "LEFT JOIN pr.user u " +
             "WHERE (:pickupRequestStatusId IS NULL OR prs.id = :pickupRequestStatusId) " +
+            "AND (:id IS NULL OR pr.id = :id)"+
             "AND (:recollectorUserId IS NULL OR u.id = :recollectorUserId) " +
             "AND (:filterSearchValue IS NULL OR " +
             "cp.address LIKE %:filterSearchValue% OR " +
@@ -24,5 +25,5 @@ public interface PickupRequestCustomRepository extends CrudRepository<PickupRequ
             "u.name LIKE %:filterSearchValue% OR " +
             "u.lastName LIKE %:filterSearchValue% OR " +
             "u.email LIKE %:filterSearchValue%)")
-    List<PickupRequestCustomEntity> findByFilters(@Param("pickupRequestStatusId") Integer pickupRequestStatusId, @Param("filterSearchValue") String filterSearchValue, @Param("recollectorUserId") String recollectorUserId);
+    List<PickupRequestCustomEntity> findByFilters(@Param("pickupRequestStatusId") Integer pickupRequestStatusId, @Param("filterSearchValue") String filterSearchValue, @Param("recollectorUserId") String recollectorUserId, @Param("id") String id);
 }

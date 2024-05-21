@@ -3,6 +3,7 @@ package co.com.collections.usecase.pickuprequest;
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
 import co.com.collections.model.pickuprequest.gateways.PickupRequestRepository;
+import co.com.collections.model.pickuprequest.dto.CollectionByStateHistoricDTO;
 import co.com.collections.usecase.pickuprequest.dto.CompletePickupRequestDTO;
 import co.com.collections.usecase.pickuprequest.dto.UpdatePickupRequestRecollectorAndPickupDateDTO;
 import co.com.collections.usecase.pickuprequeststatus.PickupRequestStatusUseCase;
@@ -89,5 +90,9 @@ public class PickupRequestUseCase {
         pickupRequest.setPickupRequestStatusId(PickupRequestStatusUseCase.PICKUP_REQUEST_STATUS_ID_COMPLETE);
         pickupRequest.setCommentary(completePickupRequest.getAditionalCommentary());
         pickupRequestRepository.updatePickupRequest(pickupRequest);
+    }
+
+    public List<CollectionByStateHistoricDTO> getCollectionsByStateHistoric() {
+        return pickupRequestRepository.getCollectionsByStateHistoric();
     }
 }

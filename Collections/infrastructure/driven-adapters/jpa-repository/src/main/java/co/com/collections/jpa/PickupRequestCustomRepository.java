@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
+import co.com.collections.model.pickuprequest.dto.CollectionByStateHistoricDTO;
 
 import java.util.List;
 
@@ -25,4 +26,11 @@ public interface PickupRequestCustomRepository extends CrudRepository<PickupRequ
             "u.lastName LIKE %:filterSearchValue% OR " +
             "u.email LIKE %:filterSearchValue%)")
     List<PickupRequestCustomEntity> findByFilters(@Param("pickupRequestStatusId") Integer pickupRequestStatusId, @Param("filterSearchValue") String filterSearchValue, @Param("recollectorUserId") String recollectorUserId);
+
+    @Query("SELECT new co.com.collections.model.pickuprequest.dto.CollectionByStateHistoricDTO(cp.state, SUM(pr.kilograms) as totalKilogramsCollected)\n" +
+            "FROM PickupRequestCustomEntity pr\n" +
+            "JOIN pr.collectionPoint cp\n" +
+            "GROUP BY cp.state\n" +
+            "ORDER BY totalKilogramsCollected DESC")
+    List<CollectionByStateHistoricDTO> findCollectionByStatesHistoric();
 }

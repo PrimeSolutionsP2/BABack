@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -53,8 +54,14 @@ public class ApiRest {
     }
 
     @PatchMapping("/{id}")
-    ResponseEntity<GenericResponse<CollectionPoint>> updateCollectionPoint(@PathVariable(name = "id") Integer id, @RequestParam(name = "role", required = true) String role, @RequestBody CollectionPoint collectionPoint) throws CustomException {
+    public ResponseEntity<GenericResponse<CollectionPoint>> updateCollectionPoint(@PathVariable(name = "id") Integer id, @RequestParam(name = "role", required = true) String role, @RequestBody CollectionPoint collectionPoint) throws CustomException {
         GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.updateCollectionPoint(id, role, collectionPoint), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/general-stats")
+    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getAllStatesStats(){
+        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAllStatesStats(), "OK");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

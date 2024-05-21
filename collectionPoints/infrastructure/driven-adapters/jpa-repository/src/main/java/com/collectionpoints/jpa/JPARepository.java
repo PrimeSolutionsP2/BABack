@@ -30,4 +30,6 @@ public interface JPARepository extends CrudRepository<CollectionPointEntity, Int
             @Param("search") String search,
             @Param("statusId") String statusId
     );
+
+    Integer countByState(String state);
 }

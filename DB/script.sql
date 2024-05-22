@@ -68,43 +68,16 @@ CREATE TABLE collection_point (
   city VARCHAR(50) NOT NULL,
   state VARCHAR(50) NOT NULL,
   country VARCHAR(50) NOT NULL,
-<<<<<<< HEAD
-<<<<<<< HEAD
+  created_at DATETIME DEFAULT NOW(),
   user_id_file TINYINT(1) NOT NULL DEFAULT 0,
   place_image TINYINT(1) NOT NULL DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (status_id) REFERENCES status(id)
 );
  
-INSERT INTO collection_point (user_id, name, address, agreement_code, city, state, country, status_id) 
-VALUES 
-('3333333333', 'Punto de acopio #4', '123 Calle Principal', 'XYZ789', 'Bogotá', 'Cundinamarca', 'Colombia', 1),
-('3333333333', 'Punto de acopio #5', '456 Avenida Central', NULL, 'Cali', 'Valle del Cauca', 'Colombia', 1),
-('3333333333', 'Punto de acopio #6', '789 Carrera Norte', 'ABC321', 'Barranquilla', 'Atlántico', 'Colombia', 1),
-('3333333333', 'Punto de acopio #7', '101 Plaza del Sol', 'CBA123', 'Cartagena', 'Bolívar', 'Colombia', 1),
-('3333333333', 'Punto de acopio #8', '222 Avenida del Mar', NULL, 'Santa Marta', 'Magdalena', 'Colombia', 1),
-('3333333333', 'Punto de acopio #9', '333 Calle del Río', 'XYZ321', 'Pereira', 'Risaralda', 'Colombia', 2),
-('3333333333', 'Punto de acopio #10', '444 Avenida del Bosque', 'ABC789', 'Manizales', 'Caldas', 'Colombia', 2),
-('3333333333', 'Punto de acopio #11', '555 Carrera del Lago', NULL, 'Ibagué', 'Tolima', 'Colombia', 2),
-('3333333333', 'Punto de acopio #12', '666 Plaza del Parque', 'XYZ123', 'Villavicencio', 'Meta', 'Colombia', 2),
-('4444444444', 'Punto de acopio #13', '777 Calle del Puente', 'CBA789', 'Pasto', 'Nariño', 'Colombia', 2),
-('4444444444', 'Punto de acopio #14', '888 Avenida del Cerro', NULL, 'Armenia', 'Quindío', 'Colombia', 2),
-('4444444444', 'Punto de acopio #15', '999 Carrera del Valle', 'ABC987', 'Popayán', 'Cauca', 'Colombia', 3),
-('4444444444', 'Punto de acopio #16', '111 Calle del Pueblo', 'XYZ987', 'Tunja', 'Boyacá', 'Colombia', 3),
-('4444444444', 'Punto de acopio #17', '222 Avenida del Campo', NULL, 'Riohacha', 'La Guajira', 'Colombia', 3),
-('4444444444', 'Punto de acopio #18', '333 Plaza del Monte', 'CBA987', 'Quibdó', 'Chocó', 'Colombia', 3),
-('4444444444', 'Punto de acopio #19', '444 Calle del Mar', 'ABC987', 'Neiva', 'Huila', 'Colombia', 3),
-('5555555555', 'Punto de acopio #20', '555 Avenida del Sol', NULL, 'Sincelejo', 'Sucre', 'Colombia', 3);
-=======
-  created_at DATETIME DEFAULT NOW(),
-=======
-  created_at DATETIME DEFAULT NOW(),
-  user_id_file TINYINT(1) NOT NULL DEFAULT 0,
-  place_image TINYINT(1) NOT NULL DEFAULT 0,
->>>>>>> develop
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (status_id) REFERENCES status(id)
-);
+
+
+
 
 INSERT INTO collection_point (user_id, status_id, name, agreement_code, address, city, state, country, created_at) VALUES
 (12345, 1, 'Punto de acopio #1', 'ABC123', 'Calle Falsa 123', 'Medellin', 'Antioquia', 'Colombia', '2024-05-16 00:28:50'),
@@ -184,7 +157,6 @@ INSERT INTO collection_point (user_id, status_id, name, agreement_code, address,
 (7, 1, 'Punto de Recolección BP', 'AGMT8689', 'Calle 5050', 'Ansermanuevo', 'Valle del Cauca', 'Colombia', '2024-06-22 18:00:00'),
 (8, 2, 'Punto de Recolección BQ', 'AGMT9690', 'Carrera 5151', 'Andalucía', 'Valle del Cauca', 'Colombia', '2024-06-23 19:00:00');
 
->>>>>>> feature/collectionPoint
 -- pickup_request_status TABLE
 CREATE TABLE pickup_request_status (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -216,5 +188,5 @@ CREATE TABLE pickup_request (
 
 INSERT INTO pickup_request (user_id, collection_point_id, kilograms, pickup_date, date_create, pickup_request_status_id )
 VALUES 
-('1111111111', 3, NULL, '2024-03-29 12:00:00', NOW(), 1),
-('1111111111', 3, NULL, '2024-03-29 12:00:00', NOW(), 1);
+(1234, 3, NULL, '2024-03-29 12:00:00', NOW(), 1),
+(1234, 3, NULL, '2024-03-29 12:00:00', NOW(), 1);

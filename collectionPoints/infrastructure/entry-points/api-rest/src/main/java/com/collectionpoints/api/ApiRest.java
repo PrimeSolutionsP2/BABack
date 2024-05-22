@@ -77,17 +77,7 @@ public class ApiRest {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/general-stats")
-    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getAllStatesStats(){
-        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAllStatesStats(), "OK");
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
 
-    @PostMapping("/specific-stats")
-    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getStats(@RequestBody SpecificStats specificStats){
-        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getStats(specificStats), "OK");
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
     
     @GetMapping("/file/{fileName}")
     public ResponseEntity<Resource> downloadFile(@PathVariable(name = "fileName") String fileName, HttpServletRequest request) throws IOException {
@@ -127,6 +117,7 @@ public class ApiRest {
         collectionPointToUpdate.setPlaceImage(true);
         GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.CREATED.value(), useCase.updateCollectionPoint(id, role, collectionPointToUpdate), "CREATED SUCCESSFULLY");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+                                                                             }
     @GetMapping("/general-stats")
     public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getAllStatesStats(){
         GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAllStatesStats(), "OK");

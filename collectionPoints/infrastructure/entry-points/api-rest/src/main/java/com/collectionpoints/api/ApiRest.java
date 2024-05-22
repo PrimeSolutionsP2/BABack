@@ -18,13 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-<<<<<<< HEAD
+import java.util.HashMap;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-=======
-import java.util.HashMap;
->>>>>>> feature/collectionPoint
 import java.util.List;
 import java.util.Objects;
 
@@ -80,6 +77,18 @@ public class ApiRest {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/general-stats")
+    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getAllStatesStats(){
+        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAllStatesStats(), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/specific-stats")
+    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getStats(@RequestBody SpecificStats specificStats){
+        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getStats(specificStats), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
     @GetMapping("/file/{fileName}")
     public ResponseEntity<Resource> downloadFile(@PathVariable(name = "fileName") String fileName, HttpServletRequest request) throws IOException {
         try {

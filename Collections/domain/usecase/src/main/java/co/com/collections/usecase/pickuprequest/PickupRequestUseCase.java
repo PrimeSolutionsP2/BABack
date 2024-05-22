@@ -2,16 +2,23 @@ package co.com.collections.usecase.pickuprequest;
 
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
+import co.com.collections.model.pickuprequest.dto.CollectionByStateAndDateHistoricDTO;
 import co.com.collections.model.pickuprequest.gateways.PickupRequestRepository;
+import co.com.collections.model.pickuprequest.dto.CollectionByStateHistoricDTO;
 import co.com.collections.usecase.pickuprequest.dto.CompletePickupRequestDTO;
 import co.com.collections.usecase.pickuprequest.dto.UpdatePickupRequestRecollectorAndPickupDateDTO;
 import co.com.collections.usecase.pickuprequeststatus.PickupRequestStatusUseCase;
+import co.com.collections.usecase.util.date.DateUtils;
 import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -88,5 +95,34 @@ public class PickupRequestUseCase {
         pickupRequest.setKilograms(completePickupRequest.getKilogramsRecolected());
         pickupRequest.setPickupRequestStatusId(PickupRequestStatusUseCase.PICKUP_REQUEST_STATUS_ID_COMPLETE);
         pickupRequestRepository.updatePickupRequest(pickupRequest);
+    }
+
+    public List<CollectionByStateHistoricDTO> getCollectionsByStateHistoric() {
+        return pickupRequestRepository.getCollectionsByStateHistoric();
+    }
+
+    public List<CollectionByStateAndDateHistoricDTO> getCollectionsByStateAndDateHistoric(String filterState, Integer filterMonth, Integer filterYear) {
+        List<CollectionByStateAndDateHistoricDTO> collections = pickupRequestRepository.getCollectionsByStateAndDateHistoric(filterState, filterMonth, filterYear);
+
+        Map<LocalDateTime, CollectionByStateAndDateHistoricDTO> collectionMap = collections.stream()
+                .collect(Collectors.toMap(
+                        dto -> dto.getPickupDate().withHour(0).withMinute(0).withSecond(0).withNano(0),
+                        dto -> dto
+                ));
+        List<LocalDateTime> datesInMonth = DateUtils.getDatesInMonth(filterYear, filterMonth);
+        List<CollectionByStateAndDateHistoricDTO> completeCollections = new ArrayList<>();
+        long cumulativeSum = 0;
+        for (LocalDateTime date : datesInMonth) {
+            CollectionByStateAndDateHistoricDTO dto;
+            if (collectionMap.containsKey(date)) {
+                dto = collectionMap.get(date);
+                cumulativeSum += dto.getTotalKilogramsCollected();
+            } else {
+                dto = new CollectionByStateAndDateHistoricDTO(filterState, 0L, date);
+            }
+            completeCollections.add(new CollectionByStateAndDateHistoricDTO(dto.getState(), cumulativeSum, dto.getPickupDate()));
+        }
+
+        return completeCollections;
     }
 }

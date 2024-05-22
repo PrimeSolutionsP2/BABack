@@ -2,7 +2,9 @@ package co.com.collections.api;
 import co.com.collections.api.response.GenericResponse;
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
+import co.com.collections.model.pickuprequest.dto.CollectionByStateAndDateHistoricDTO;
 import co.com.collections.usecase.pickuprequest.PickupRequestUseCase;
+import co.com.collections.model.pickuprequest.dto.CollectionByStateHistoricDTO;
 import co.com.collections.usecase.pickuprequest.dto.CompletePickupRequestDTO;
 import co.com.collections.usecase.pickuprequest.dto.UpdatePickupRequestRecollectorAndPickupDateDTO;
 import co.com.collections.util.validator.ValidationException;
@@ -88,5 +90,15 @@ public class PickupRequestRest {
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new GenericResponse<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
         }
+    }
+
+    @GetMapping(path = "/collectionsByStateHistoric")
+    public ResponseEntity<GenericResponse<List<CollectionByStateHistoricDTO>>> getCollectionsByStateHistoric() {
+        return ResponseEntity.ok(new GenericResponse<List<CollectionByStateHistoricDTO>>("OK", HttpStatus.OK.value(), null, useCase.getCollectionsByStateHistoric()));
+    }
+
+    @GetMapping(path = "/collectionsByStateAndDateHistoric")
+    public ResponseEntity<GenericResponse<List<CollectionByStateAndDateHistoricDTO>>> getCollectionsByStateAndDateHistoric(@RequestParam String filterState, @RequestParam Integer filterMonth, @RequestParam Integer filterYear) {
+        return ResponseEntity.ok(new GenericResponse<List<CollectionByStateAndDateHistoricDTO>>("OK", HttpStatus.OK.value(), null, useCase.getCollectionsByStateAndDateHistoric(filterState, filterMonth, filterYear)));
     }
 }

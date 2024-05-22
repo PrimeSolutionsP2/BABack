@@ -273,3 +273,214 @@ Example JSON Response:
   "data": null
 }
 ```
+
+
+### Obtener suma total a nivel historico de kilogramos recolectados por departamento
+Endpoint: `/collections/collectionsByStateHistoric`
+
+Method: `GET`
+
+Example JSON Response:
+```json
+{
+    "message": "OK",
+    "statusCode": 200,
+    "errorCode": null,
+    "data": [
+        {
+            "state": "Estado1",
+            "kilograms": 5
+        },
+        {
+            "state": "Estado2",
+            "kilograms": 5
+        },
+        {
+            "state": "Estado3",
+            "kilograms": 5
+        }
+    ]
+}`
+````
+
+### Obtener recoleccion acumuluda atraves de un mes especifico en un departamento
+Endpoint: `/collections/collectionsByStateAndDateHistoric`
+
+Method: `GET`
+
+Query String parameters in Request:
+* filterState: String
+* filterMonth: Number
+* filterYear: Number
+
+
+Example:
+```
+curl --location 'http://localhost:8081/collections/collectionsByStateAndDateHistoric?filterState=Cundinamarca&filterMonth=5&filterYear=2024'
+```
+
+Example JSON Response:
+```json
+{
+  "message": "OK",
+  "statusCode": 200,
+  "errorCode": null,
+  "data": [
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-01T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-02T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-03T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-04T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-05T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-06T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-07T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-08T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-09T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-10T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-11T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-12T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-13T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-14T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-15T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-16T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-17T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-18T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 0,
+      "pickupDate": "2024-05-19T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-20T10:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-21T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-22T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-23T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-24T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-25T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-26T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-27T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 10,
+      "pickupDate": "2024-05-28T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 15,
+      "pickupDate": "2024-05-29T14:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 15,
+      "pickupDate": "2024-05-30T00:00:00"
+    },
+    {
+      "state": "Cundinamarca",
+      "totalKilogramsCollected": 15,
+      "pickupDate": "2024-05-31T00:00:00"
+    }
+  ]
+}
+```

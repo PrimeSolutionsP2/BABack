@@ -5,6 +5,7 @@ import co.com.collections.jpa.helper.AdapterOperations;
 import co.com.collections.model.collectionpoint.CollectionPointCustom;
 import co.com.collections.model.pickuprequest.PickupRequest;
 import co.com.collections.model.pickuprequest.PickupRequestCustom;
+import co.com.collections.model.pickuprequest.dto.CollectionByStateAndDateHistoricDTO;
 import co.com.collections.model.pickuprequeststatus.PickupRequestStatus;
 import co.com.collections.model.user.User;
 import org.reactivecommons.utils.ObjectMapper;
@@ -51,6 +52,12 @@ implements co.com.collections.model.pickuprequest.gateways.PickupRequestReposito
     public List<CollectionByStateHistoricDTO> getCollectionsByStateHistoric() {
         List<CollectionByStateHistoricDTO> collectionByStateHistoricDTO = this.repositoryCustom.findCollectionByStatesHistoric();
         return collectionByStateHistoricDTO;
+    }
+
+    @Override
+    public List<CollectionByStateAndDateHistoricDTO> getCollectionsByStateAndDateHistoric(String filterState, Integer filterMonth, Integer filterYear) {
+        List<CollectionByStateAndDateHistoricDTO> collectionByStateAndDateHistoricDTO = this.repositoryCustom.findCollectionByStatesAndDateHistoric(filterState, filterMonth, filterYear);
+        return collectionByStateAndDateHistoricDTO;
     }
     @Override
     public List<PickupRequestCustom> getPickupRequestsCustom(Integer pickupRequestStatusId, String searchFilterValue, String recollectorUserId) {

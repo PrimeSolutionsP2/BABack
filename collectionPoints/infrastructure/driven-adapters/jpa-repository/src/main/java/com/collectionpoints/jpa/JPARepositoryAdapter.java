@@ -46,4 +46,9 @@ implements CollectionPointRepository
     public Integer countCollectionPointsPerState(String state) {
         return this.repository.countByState(state);
     }
+
+    @Override
+    public Integer countCollectionPoints(String state, String date) {
+        return this.repository.count(state, date);
+    }
 }

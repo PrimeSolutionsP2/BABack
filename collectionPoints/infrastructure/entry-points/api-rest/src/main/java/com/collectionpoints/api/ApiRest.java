@@ -4,6 +4,7 @@ import com.collectionpoints.model.CollectionPoint;
 import com.collectionpoints.model.dto.CollectionPointFilter;
 import com.collectionpoints.model.dto.CollectionPointRequest;
 import com.collectionpoints.model.dto.CollectionPointStatusChange;
+import com.collectionpoints.model.dto.SpecificStats;
 import com.collectionpoints.model.exception.CustomException;
 import com.collectionpoints.usecase.CollectionPointUseCase;
 import lombok.AllArgsConstructor;
@@ -62,6 +63,12 @@ public class ApiRest {
     @GetMapping("/general-stats")
     public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getAllStatesStats(){
         GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAllStatesStats(), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/specific-stats")
+    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getStats(@RequestBody SpecificStats specificStats){
+        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getStats(specificStats), "OK");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

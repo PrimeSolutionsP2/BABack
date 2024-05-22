@@ -32,4 +32,12 @@ public interface JPARepository extends CrudRepository<CollectionPointEntity, Int
     );
 
     Integer countByState(String state);
+
+    @Query(value = "SELECT COUNT(*) " +
+            "FROM collection_point " +
+            "WHERE " +
+            "state=:state AND " +
+            "DATE(created_at) <= :date",
+        nativeQuery = true)
+    Integer count(@Param("state") String state, @Param("date") String date);
 }

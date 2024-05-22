@@ -11,4 +11,5 @@ public interface CollectionPointRepository {
     CollectionPoint getById(int id);
     CollectionPoint create(CollectionPoint collectionPoint);
     Integer countCollectionPointsPerState(String state);
+    Integer countCollectionPoints(String state, String date);
 }

@@ -10,4 +10,6 @@ public interface CollectionPointRepository {
     List<CollectionPoint> getAll(CollectionPointFilter collectionPointFilter);
     CollectionPoint getById(int id);
     CollectionPoint create(CollectionPoint collectionPoint);
+    Integer countCollectionPointsPerState(String state);
+    Integer countCollectionPoints(String state, String date);
 }

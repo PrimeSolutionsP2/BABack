@@ -41,4 +41,14 @@ implements CollectionPointRepository
     public CollectionPoint create(CollectionPoint collectionPoint) {
         return this.save(this.mapper.map(collectionPoint, CollectionPoint.class));
     }
+
+    @Override
+    public Integer countCollectionPointsPerState(String state) {
+        return this.repository.countByState(state);
+    }
+
+    @Override
+    public Integer countCollectionPoints(String state, String date) {
+        return this.repository.count(state, date);
+    }
 }

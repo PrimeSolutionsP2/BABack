@@ -4,6 +4,7 @@ import com.collectionpoints.model.CollectionPoint;
 import com.collectionpoints.model.dto.CollectionPointFilter;
 import com.collectionpoints.model.dto.CollectionPointRequest;
 import com.collectionpoints.model.dto.CollectionPointStatusChange;
+import com.collectionpoints.model.dto.SpecificStats;
 import com.collectionpoints.model.exception.CustomException;
 import com.collectionpoints.usecase.CollectionPointUseCase;
 import com.collectionpoints.usecase.file.FileUseCase;
@@ -17,9 +18,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+=======
+import java.util.HashMap;
+>>>>>>> feature/collectionPoint
 import java.util.List;
 import java.util.Objects;
 
@@ -70,7 +75,7 @@ public class ApiRest {
     }
 
     @PatchMapping("/{id}")
-    ResponseEntity<GenericResponse<CollectionPoint>> updateCollectionPoint(@PathVariable(name = "id") Integer id, @RequestParam(name = "role", required = true) String role, @RequestBody CollectionPoint collectionPoint) throws CustomException {
+    public ResponseEntity<GenericResponse<CollectionPoint>> updateCollectionPoint(@PathVariable(name = "id") Integer id, @RequestParam(name = "role", required = true) String role, @RequestBody CollectionPoint collectionPoint) throws CustomException {
         GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.updateCollectionPoint(id, role, collectionPoint), "OK");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -113,5 +118,15 @@ public class ApiRest {
         collectionPointToUpdate.setPlaceImage(true);
         GenericResponse<CollectionPoint> response = new GenericResponse<>(HttpStatus.CREATED.value(), useCase.updateCollectionPoint(id, role, collectionPointToUpdate), "CREATED SUCCESSFULLY");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @GetMapping("/general-stats")
+    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getAllStatesStats(){
+        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getAllStatesStats(), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/specific-stats")
+    public ResponseEntity<GenericResponse<HashMap<String, Integer>>> getStats(@RequestBody SpecificStats specificStats){
+        GenericResponse<HashMap<String, Integer>> response = new GenericResponse<>(HttpStatus.OK.value(), useCase.getStats(specificStats), "OK");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

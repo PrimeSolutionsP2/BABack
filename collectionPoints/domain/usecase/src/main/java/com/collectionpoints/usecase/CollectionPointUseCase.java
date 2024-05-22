@@ -1,16 +1,15 @@
 package com.collectionpoints.usecase;
 
 import com.collectionpoints.model.CollectionPoint;
-import com.collectionpoints.model.dto.CollectionPointFilter;
-import com.collectionpoints.model.dto.CollectionPointRequest;
-import com.collectionpoints.model.dto.CollectionPointStatusChange;
-import com.collectionpoints.model.dto.UserResponse;
+import com.collectionpoints.model.dto.*;
 import com.collectionpoints.model.exception.CustomException;
 import com.collectionpoints.model.exception.HttpStatusCode;
 import com.collectionpoints.model.gateways.CollectionPointRepository;
 import com.collectionpoints.model.gateways.UserConsumerRespository;
 import lombok.AllArgsConstructor;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @AllArgsConstructor
@@ -91,4 +90,66 @@ public class CollectionPointUseCase {
         return collectionPointRepository.create(existingCollectionPoint);
     }
 
+    public HashMap<String, Integer> getAllStatesStats(){
+
+        HashMap<String, Integer> stats = new HashMap<>();
+
+        String[] states = {
+                "AMAZONAS",
+                "ANTIOQUIA",
+                "ARAUCA",
+                "ATLANTICO",
+                "BOLIVAR",
+                "BOYACA",
+                "CALDAS",
+                "CAQUETA",
+                "CASANARE",
+                "CAUCA",
+                "CESAR",
+                "CHOCO",
+                "CORDOBA",
+                "CUNDINAMARCA",
+                "GUAINIA",
+                "GUAVIARE",
+                "HUILA",
+                "LA GUAJIRA",
+                "MAGDALENA",
+                "META",
+                "NARINO",
+                "NORTE DE SANTANDER",
+                "PUTUMAYO",
+                "QUINDIO",
+                "RISARALDA",
+                "SAN ANDRES Y PROVIDENCIA",
+                "SANTANDER",
+                "SUCRE",
+                "TOLIMA",
+                "VALLE DEL CAUCA",
+                "VAUPES",
+                "VICHADA"
+        };
+
+        for(String state: states) {
+            int count = collectionPointRepository.countCollectionPointsPerState(state);
+            stats.put(state, count);
+        }
+
+        return stats;
+    }
+
+    public HashMap<String, Integer> getStats(SpecificStats specificStats){
+        LinkedHashMap<String, Integer> stats = new LinkedHashMap<>();
+
+        String state = specificStats.getState();
+        int month = specificStats.getMonth();
+        int year = specificStats.getYear();
+
+        for(int i = 1; i <= 30; i++) {
+            String date = year + "-" + month + "-" + i;
+            int count = collectionPointRepository.countCollectionPoints(state, date);
+            stats.put(date, count);
+        }
+
+        return stats;
+    }
 }

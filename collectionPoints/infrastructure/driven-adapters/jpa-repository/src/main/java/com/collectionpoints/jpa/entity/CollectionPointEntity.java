@@ -21,6 +21,10 @@ public class CollectionPointEntity {
     private String country;
     @Column(name = "status_id")
     private Integer statusId;
+    @Column(name = "user_id_file")
+    private Boolean userIdFile;
+    @Column(name = "place_image")
+    private Boolean placeImage;
     @ManyToOne
     @JoinColumn(name = "status_id", insertable = false, updatable = false)
     private StatusEntity status;

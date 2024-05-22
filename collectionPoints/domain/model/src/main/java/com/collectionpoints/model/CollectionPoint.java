@@ -1,5 +1,6 @@
 package com.collectionpoints.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,8 @@ public class CollectionPoint {
     private String country;
     private int statusId = 1;
     private Status status;
+    private Boolean userIdFile;
+    private Boolean placeImage;
 
     // TODO
     // Implement document system

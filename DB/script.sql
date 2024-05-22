@@ -69,6 +69,8 @@ CREATE TABLE collection_point (
   state VARCHAR(50) NOT NULL,
   country VARCHAR(50) NOT NULL,
   created_at DATETIME DEFAULT NOW(),
+  user_id_file TINYINT(1) NOT NULL DEFAULT 0,
+  place_image TINYINT(1) NOT NULL DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (status_id) REFERENCES status(id)
 );

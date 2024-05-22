@@ -273,3 +273,32 @@ Example JSON Response:
   "data": null
 }
 ```
+
+
+### Obtener suma total a nivel historico de kilogramos recolectados por departamento
+Endpoint: `/collections/collectionsByStateHistoric`
+
+Method: `GET`
+
+Example JSON Response:
+```json
+{
+    "message": "OK",
+    "statusCode": 200,
+    "errorCode": null,
+    "data": [
+        {
+            "state": "Estado1",
+            "kilograms": 5
+        },
+        {
+            "state": "Estado2",
+            "kilograms": 5
+        },
+        {
+            "state": "Estado3",
+            "kilograms": 5
+        }
+    ]
+}
+```

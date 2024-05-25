@@ -12,6 +12,7 @@ import (
 
 var (
 	DeleteKey = "delete-user"
+
 )
 
 type deleteProvider struct {
@@ -31,10 +32,26 @@ func (d *deleteProvider) DeleteById(id string) (bool, *domain.ErrorMessage) {
 	if err != nil {
 		return false, &domain.ErrorMessage{
 			Code:    http.StatusInternalServerError,
-			Message: constant.ConnectingDataBase,
+			Message: err.Error(),
 		}
 	}
 	defer stmt.Close()
+
+	if _, err = d.connection.Exec("DELETE FROM pickup_request WHERE user_id = ?", id); err != nil {
+		return false, &domain.ErrorMessage{
+			Code:    http.StatusInternalServerError,
+			Message: constant.ErrorDeletingUser,
+		}
+    }
+
+    // Delete from collection_point
+    if _, err = d.connection.Exec("DELETE FROM collection_point WHERE user_id = ?", id); err != nil {
+		return false, &domain.ErrorMessage{
+			Code:    http.StatusInternalServerError,
+			Message: constant.ErrorDeletingUser,
+		}
+    }
+
 
 	result, err := stmt.Exec(id)
 	if err != nil {
@@ -43,6 +60,7 @@ func (d *deleteProvider) DeleteById(id string) (bool, *domain.ErrorMessage) {
 			Message: constant.ErrorDeletingUser,
 		}
 	}
+	
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {

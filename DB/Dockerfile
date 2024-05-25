@@ -5,7 +5,7 @@ FROM mysql:latest
 ENV MYSQL_ROOT_PASSWORD=root
 ENV MYSQL_DATABASE=botellas_amor
 ENV MYSQL_PASSWORD=root
-
+ENV LANG=C.UTF-8
 # Copy your .sql script into the container
 COPY script.sql /docker-entrypoint-initdb.d/
 
